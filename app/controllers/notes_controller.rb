@@ -34,7 +34,10 @@ class NotesController < ApplicationController
         @notes = Note.includes(:tags,:taggings).references(:tags).where(
           'notes.title LIKE :search OR notes.description LIKE :search OR tags.name LIKE :search',
           search: "%#{params[:query]}%"
-        )
+        ).where(
+         status: false,
+         user_id: current_user.id
+       ).distinct
       end
      # render plain: @notes.inspect
   end
