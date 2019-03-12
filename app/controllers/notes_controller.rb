@@ -36,7 +36,7 @@ class NotesController < ApplicationController
           search: "%#{params[:query]}%"
         )
       end
-     render plain: @notes.inspect
+     # render plain: @notes.inspect
   end
 
   #
