@@ -25,15 +25,23 @@ class NotesController < ApplicationController
 
   def search
     # tag = params[:search_notes][:query]
-    query = params[:search_notes].presence && params[:search_notes][:query]
+    # query = params[:search_notes].presence && params[:search_notes][:query]
     # tags = Note.tagged_with(query)
     # note = Note.search_published(query)
-    note = Note.all.search(query).includes(:taggings)
-     # render plain: note.inspect
-    return unless query
-
-    @notes =  note
-     render plain: @notes.inspect
+    # render plain: note.inspect
+    @notes =
+      if params[:search_notes][:query]
+        @notes = Note.includes(:tags,:taggings).references(:tags).where(
+          'notes.title LIKE :search OR notes.description LIKE :search OR tags.name LIKE :search',
+          search: "%#{params[:search]}%"
+        ).paginate(
+          page: params[:page],
+          per_page: 4
+        ).where(
+          status: true,
+          user_id: current_user.id
+        ).distinct
+    # render plain: @notes.inspect
   end
 
   #
