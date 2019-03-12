@@ -30,7 +30,7 @@ class NotesController < ApplicationController
     # note = Note.search_published(query)
     # render plain: note.inspect
     @notes =
-      if params[:search_notes][:query]
+      if params[:search_notes]
         @notes = Note.includes(:tags,:taggings).references(:tags).where(
           'notes.title LIKE :search OR notes.description LIKE :search OR tags.name LIKE :search',
           search: "%#{params[:search_notes][:query]}%"
