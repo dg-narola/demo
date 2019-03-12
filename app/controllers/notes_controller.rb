@@ -33,7 +33,7 @@ class NotesController < ApplicationController
       if params[:search_notes].presence && params[:search_notes][:query]
         @notes = Note.includes(:tags,:taggings).references(:tags).where(
           'notes.title LIKE :search OR notes.description LIKE :search OR tags.name LIKE :search',
-          search: "%#{params[:search_notes][:query]}%"
+          search: "%#{params[:query]}%"
         )
       end
      render plain: @notes.inspect
