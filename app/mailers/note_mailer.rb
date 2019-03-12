@@ -15,7 +15,7 @@ class NoteMailer < ApplicationMailer
   ## for sharing notes via mail for unregistered users
   def reg_email(sharenote, user)
     @sharenote = sharenote
-    @url  = 'http://linfinite-reaches-72546.herokuapp.com/users/sign_up'
+    @url  = 'http://infinite-reaches-72546.herokuapp.com/users/sign_up'
     @user = user
     mail(to: @sharenote.email, subject: 'Note Shared')
   end
