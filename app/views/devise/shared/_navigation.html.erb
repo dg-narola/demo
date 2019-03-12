@@ -6,7 +6,7 @@
     <div id="navbar">
       <ul class="nav navbar-nav">
         <li><%= link_to 'Notes Shared To Me', sharenotes_index_notes_path, remote: true%></li>
-        <li><%= link_to 'Notes Shared By Me', sharenotes_shownote_notes_path, local: true%></li>
+        <li><%= link_to 'Notes Shared By Me', sharenotes_shownote_notes_path, remote: true%></li>
       </ul>
       <ul class="nav navbar-nav pull-right">
         <% if user_signed_in? %>
