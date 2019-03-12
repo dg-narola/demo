@@ -41,6 +41,7 @@ class NotesController < ApplicationController
           status: true,
           user_id: current_user.id
         ).distinct
+      end
     # render plain: @notes.inspect
   end
 
