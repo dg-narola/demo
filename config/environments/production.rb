@@ -20,7 +20,7 @@ Rails.application.configure do
   # or in config/master.key. This key is used to decrypt credentials (and other encrypted files).
   # config.require_master_key = true
 
-  config.action_mailer.default_url_options = { host: 'serene-peak-80198.herokuapp.com',  protocol: 'http' }
+  config.action_mailer.default_url_options = { host: 'infinite-reaches-72546.herokuapp.com',  protocol: 'http' }
 
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.perform_deliveries = true
