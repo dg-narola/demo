@@ -38,7 +38,7 @@ class NotesController < ApplicationController
           page: params[:page],
           per_page: 4
         ).where(
-          status: true,
+          status: false,
           user_id: current_user.id
         ).distinct
       end
