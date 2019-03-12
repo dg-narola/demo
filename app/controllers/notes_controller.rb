@@ -35,8 +35,7 @@ class NotesController < ApplicationController
           'notes.title LIKE :search OR notes.description LIKE :search OR tags.name LIKE :search',
           search: "%#{params[:query]}%"
         ).where(
-         status: false,
-         user_id: current_user.id
+         status: false
        ).distinct
       end
       render plain: @notes.inspect
