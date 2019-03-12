@@ -2,13 +2,13 @@
   <% if notes.blank? %>
     <h5>No notes found matching your query.</h5>
   <% else %>
-    <table class="table table-bordered table-stripped ">
+    <table class="table table-bordered table-stripped search-form">
         <thead>
           <tr>
             <th colspan="2"><center>Note</center></th>
           </tr>
         </thead>
-        <tbody class="search-form">
+        <tbody>
          <% notes.each do |note| %>
             <tr>
               <td>

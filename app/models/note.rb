@@ -82,4 +82,4 @@ class Note < ApplicationRecord
   end
 
 end
-#Note.import
+Note.import

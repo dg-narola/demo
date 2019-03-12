@@ -32,7 +32,7 @@ class NotesController < ApplicationController
     return unless query
 
     @notes =  tags + note
-    # render plain: @notes.inspect
+     render plain: @notes.inspect
   end
 
   #
@@ -46,9 +46,7 @@ class NotesController < ApplicationController
   def create
     @notes = Note.all
     @note = Note.create(note_params)
-    respond_to do |format|
-      format.js { render js: 'window.location.href = "notes";' }
-    end
+    redirect_to notes_path
   end
 
   #
@@ -88,7 +86,7 @@ class NotesController < ApplicationController
   def tagged
     tag = params[:tag]
     if tag.present?
-      @notes = Note.includes(:taggings).tagged_with(tag)
+      @notes = Note.includes(:taggings).tagged_with(tag).where(status: false)
       _b = 1
     else
       @notes = Note.all
@@ -163,7 +161,7 @@ class NotesController < ApplicationController
     @notes = Note.all
     # @note = Note.find_by_id(params[:id])
     @note.update(status: true)
-    redirect_to notes_path
+    # redirect_to notes_path
   end
 
   #
