@@ -1,0 +1,2043 @@
+  [1m[36mNote Load (0.9ms)[0m  [1m[34mSELECT  "notes".* FROM "notes" ORDER BY "notes"."id" ASC LIMIT ?[0m  [["LIMIT", 1000]]
+  ↳ app/models/note.rb:85
+  [1m[36mNote Load (0.9ms)[0m  [1m[34mSELECT  "notes".* FROM "notes" ORDER BY "notes"."id" ASC LIMIT ?[0m  [["LIMIT", 1000]]
+  ↳ app/models/note.rb:85
+  [1m[36mNote Load (0.8ms)[0m  [1m[34mSELECT  "notes".* FROM "notes" ORDER BY "notes"."id" ASC LIMIT ?[0m  [["LIMIT", 1000]]
+  ↳ app/models/note.rb:85
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  ↳ bin/rails:11
+  [1m[35m (1.4ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL PRIMARY KEY)[0m
+  ↳ bin/rails:11
+  [1m[35m (1.4ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" varchar NOT NULL PRIMARY KEY, "value" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  ↳ bin/rails:11
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:11
+Migrating to DeviseCreateUsers (20190205104200)
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ bin/rails:11
+  [1m[35m (0.5ms)[0m  [1m[35mCREATE TABLE "users" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "email" varchar DEFAULT '' NOT NULL, "encrypted_password" varchar DEFAULT '' NOT NULL, "image" varchar, "username" varchar, "reset_password_token" varchar, "reset_password_sent_at" datetime, "remember_created_at" datetime, "confirmation_token" varchar, "confirmed_at" datetime, "confirmation_sent_at" datetime, "unconfirmed_email" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  ↳ db/migrate/20190205104200_devise_create_users.rb:6
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_users_on_email" ON "users" ("email")[0m
+  ↳ db/migrate/20190205104200_devise_create_users.rb:41
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_users_on_reset_password_token" ON "users" ("reset_password_token")[0m
+  ↳ db/migrate/20190205104200_devise_create_users.rb:42
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_users_on_confirmation_token" ON "users" ("confirmation_token")[0m
+  ↳ db/migrate/20190205104200_devise_create_users.rb:43
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20190205104200"]]
+  ↳ bin/rails:11
+  [1m[35m (1.6ms)[0m  [1m[36mcommit transaction[0m
+  ↳ bin/rails:11
+Migrating to CreateNotes (20190206092254)
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ bin/rails:11
+  [1m[35m (0.8ms)[0m  [1m[35mCREATE TABLE "notes" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "title" varchar, "description" text, "status" boolean DEFAULT 0, "user_id" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL, CONSTRAINT "fk_rails_7f2323ad43"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+)[0m
+  ↳ db/migrate/20190206092254_create_notes.rb:6
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE  INDEX "index_notes_on_user_id" ON "notes" ("user_id")[0m
+  ↳ db/migrate/20190206092254_create_notes.rb:6
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20190206092254"]]
+  ↳ bin/rails:11
+  [1m[35m (5.5ms)[0m  [1m[36mcommit transaction[0m
+  ↳ bin/rails:11
+Migrating to CreateComments (20190206110742)
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ bin/rails:11
+  [1m[35m (0.8ms)[0m  [1m[35mCREATE TABLE "comments" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "comment" varchar, "note_id" integer, "user_id" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL, CONSTRAINT "fk_rails_2454c4e239"
+FOREIGN KEY ("note_id")
+  REFERENCES "notes" ("id")
+, CONSTRAINT "fk_rails_03de2dc08c"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+)[0m
+  ↳ db/migrate/20190206110742_create_comments.rb:6
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE  INDEX "index_comments_on_note_id" ON "comments" ("note_id")[0m
+  ↳ db/migrate/20190206110742_create_comments.rb:6
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE  INDEX "index_comments_on_user_id" ON "comments" ("user_id")[0m
+  ↳ db/migrate/20190206110742_create_comments.rb:6
+  [1m[36mActiveRecord::SchemaMigration Create (0.7ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20190206110742"]]
+  ↳ bin/rails:11
+  [1m[35m (1.8ms)[0m  [1m[36mcommit transaction[0m
+  ↳ bin/rails:11
+Migrating to ActsAsTaggableOnMigration (20190215065540)
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ bin/rails:11
+  [1m[35m (0.7ms)[0m  [1m[35mCREATE TABLE "tags" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar)[0m
+  ↳ db/migrate/20190215065540_acts_as_taggable_on_migration.acts_as_taggable_on_engine.rb:11
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE TABLE "taggings" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "tag_id" integer, "taggable_type" varchar, "taggable_id" integer, "tagger_type" varchar, "tagger_id" integer, "context" varchar(128), "created_at" datetime)[0m
+  ↳ db/migrate/20190215065540_acts_as_taggable_on_migration.acts_as_taggable_on_engine.rb:15
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE  INDEX "index_taggings_on_tag_id" ON "taggings" ("tag_id")[0m
+  ↳ db/migrate/20190215065540_acts_as_taggable_on_migration.acts_as_taggable_on_engine.rb:30
+  [1m[35m (0.6ms)[0m  [1m[35mCREATE  INDEX "index_taggings_on_taggable_id_and_taggable_type_and_context" ON "taggings" ("taggable_id", "taggable_type", "context")[0m
+  ↳ db/migrate/20190215065540_acts_as_taggable_on_migration.acts_as_taggable_on_engine.rb:31
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20190215065540"]]
+  ↳ bin/rails:11
+  [1m[35m (1.6ms)[0m  [1m[36mcommit transaction[0m
+  ↳ bin/rails:11
+Migrating to AddMissingUniqueIndices (20190215065541)
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ bin/rails:11
+  [1m[35m (0.6ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_tags_on_name" ON "tags" ("name")[0m
+  ↳ db/migrate/20190215065541_add_missing_unique_indices.acts_as_taggable_on_engine.rb:11
+  [1m[35m (0.3ms)[0m  [1m[35mDROP INDEX "index_taggings_on_tag_id"[0m
+  ↳ db/migrate/20190215065541_add_missing_unique_indices.acts_as_taggable_on_engine.rb:13
+  [1m[35m (0.3ms)[0m  [1m[35mDROP INDEX "index_taggings_on_taggable_id_and_taggable_type_and_context"[0m
+  ↳ db/migrate/20190215065541_add_missing_unique_indices.acts_as_taggable_on_engine.rb:14
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE UNIQUE INDEX "taggings_idx" ON "taggings" ("tag_id", "taggable_id", "taggable_type", "context", "tagger_id", "tagger_type")[0m
+  ↳ db/migrate/20190215065541_add_missing_unique_indices.acts_as_taggable_on_engine.rb:15
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20190215065541"]]
+  ↳ bin/rails:11
+  [1m[35m (1.3ms)[0m  [1m[36mcommit transaction[0m
+  ↳ bin/rails:11
+Migrating to AddTaggingsCounterCacheToTags (20190215065542)
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ bin/rails:11
+  [1m[35m (0.9ms)[0m  [1m[35mALTER TABLE "tags" ADD "taggings_count" integer DEFAULT 0[0m
+  ↳ db/migrate/20190215065542_add_taggings_counter_cache_to_tags.acts_as_taggable_on_engine.rb:11
+  [1m[36mActsAsTaggableOn::Tag Load (0.2ms)[0m  [1m[34mSELECT  "tags".* FROM "tags" ORDER BY "tags"."id" ASC LIMIT ?[0m  [["LIMIT", 1000]]
+  ↳ db/migrate/20190215065542_add_taggings_counter_cache_to_tags.acts_as_taggable_on_engine.rb:14
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20190215065542"]]
+  ↳ bin/rails:11
+  [1m[35m (1.6ms)[0m  [1m[36mcommit transaction[0m
+  ↳ bin/rails:11
+Migrating to AddMissingTaggableIndex (20190215065543)
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ bin/rails:11
+  [1m[35m (0.8ms)[0m  [1m[35mCREATE  INDEX "index_taggings_on_taggable_id_and_taggable_type_and_context" ON "taggings" ("taggable_id", "taggable_type", "context")[0m
+  ↳ db/migrate/20190215065543_add_missing_taggable_index.acts_as_taggable_on_engine.rb:11
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20190215065543"]]
+  ↳ bin/rails:11
+  [1m[35m (1.0ms)[0m  [1m[36mcommit transaction[0m
+  ↳ bin/rails:11
+Migrating to ChangeCollationForTagNames (20190215065544)
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ bin/rails:11
+  [1m[36mActiveRecord::SchemaMigration Create (0.7ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20190215065544"]]
+  ↳ bin/rails:11
+  [1m[35m (1.3ms)[0m  [1m[36mcommit transaction[0m
+  ↳ bin/rails:11
+Migrating to AddMissingIndexesOnTaggings (20190215065545)
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ bin/rails:11
+  [1m[35m (0.5ms)[0m  [1m[35mCREATE  INDEX "index_taggings_on_tag_id" ON "taggings" ("tag_id")[0m
+  ↳ db/migrate/20190215065545_add_missing_indexes_on_taggings.acts_as_taggable_on_engine.rb:11
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE  INDEX "index_taggings_on_taggable_id" ON "taggings" ("taggable_id")[0m
+  ↳ db/migrate/20190215065545_add_missing_indexes_on_taggings.acts_as_taggable_on_engine.rb:12
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE  INDEX "index_taggings_on_taggable_type" ON "taggings" ("taggable_type")[0m
+  ↳ db/migrate/20190215065545_add_missing_indexes_on_taggings.acts_as_taggable_on_engine.rb:13
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE  INDEX "index_taggings_on_tagger_id" ON "taggings" ("tagger_id")[0m
+  ↳ db/migrate/20190215065545_add_missing_indexes_on_taggings.acts_as_taggable_on_engine.rb:14
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE  INDEX "index_taggings_on_context" ON "taggings" ("context")[0m
+  ↳ db/migrate/20190215065545_add_missing_indexes_on_taggings.acts_as_taggable_on_engine.rb:15
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE  INDEX "index_taggings_on_tagger_id_and_tagger_type" ON "taggings" ("tagger_id", "tagger_type")[0m
+  ↳ db/migrate/20190215065545_add_missing_indexes_on_taggings.acts_as_taggable_on_engine.rb:17
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE  INDEX "taggings_idy" ON "taggings" ("taggable_id", "taggable_type", "tagger_id", "context")[0m
+  ↳ db/migrate/20190215065545_add_missing_indexes_on_taggings.acts_as_taggable_on_engine.rb:19
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20190215065545"]]
+  ↳ bin/rails:11
+  [1m[35m (1.0ms)[0m  [1m[36mcommit transaction[0m
+  ↳ bin/rails:11
+Migrating to AddImpToNotes (20190216054120)
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ bin/rails:11
+  [1m[35m (0.7ms)[0m  [1m[35mALTER TABLE "notes" ADD "important" boolean DEFAULT 0[0m
+  ↳ db/migrate/20190216054120_add_imp_to_notes.rb:6
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20190216054120"]]
+  ↳ bin/rails:11
+  [1m[35m (19.5ms)[0m  [1m[36mcommit transaction[0m
+  ↳ bin/rails:11
+Migrating to CreateActiveStorageTables (20190216071515)
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ bin/rails:11
+  [1m[35m (0.8ms)[0m  [1m[35mCREATE TABLE "active_storage_blobs" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "key" varchar NOT NULL, "filename" varchar NOT NULL, "content_type" varchar, "metadata" text, "byte_size" bigint NOT NULL, "checksum" varchar NOT NULL, "created_at" datetime NOT NULL)[0m
+  ↳ db/migrate/20190216071515_create_active_storage_tables.active_storage.rb:6
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_active_storage_blobs_on_key" ON "active_storage_blobs" ("key")[0m
+  ↳ db/migrate/20190216071515_create_active_storage_tables.active_storage.rb:6
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE TABLE "active_storage_attachments" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar NOT NULL, "record_type" varchar NOT NULL, "record_id" integer NOT NULL, "blob_id" integer NOT NULL, "created_at" datetime NOT NULL, CONSTRAINT "fk_rails_c3b3935057"
+FOREIGN KEY ("blob_id")
+  REFERENCES "active_storage_blobs" ("id")
+)[0m
+  ↳ db/migrate/20190216071515_create_active_storage_tables.active_storage.rb:18
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE  INDEX "index_active_storage_attachments_on_blob_id" ON "active_storage_attachments" ("blob_id")[0m
+  ↳ db/migrate/20190216071515_create_active_storage_tables.active_storage.rb:18
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_active_storage_attachments_uniqueness" ON "active_storage_attachments" ("record_type", "record_id", "name", "blob_id")[0m
+  ↳ db/migrate/20190216071515_create_active_storage_tables.active_storage.rb:18
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20190216071515"]]
+  ↳ bin/rails:11
+  [1m[35m (1.3ms)[0m  [1m[36mcommit transaction[0m
+  ↳ bin/rails:11
+Migrating to AddAutoSaveToUser (20190220090550)
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ bin/rails:11
+  [1m[35m (1.1ms)[0m  [1m[35mALTER TABLE "users" ADD "autosave" boolean DEFAULT 0[0m
+  ↳ db/migrate/20190220090550_add_auto_save_to_user.rb:6
+  [1m[36mActiveRecord::SchemaMigration Create (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20190220090550"]]
+  ↳ bin/rails:11
+  [1m[35m (2.5ms)[0m  [1m[36mcommit transaction[0m
+  ↳ bin/rails:11
+Migrating to CreateSharenotes (20190220125141)
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ bin/rails:11
+  [1m[35m (0.7ms)[0m  [1m[35mCREATE TABLE "sharenotes" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "email" varchar, "user_id" integer, "note_id" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL, CONSTRAINT "fk_rails_88d2292ca9"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+, CONSTRAINT "fk_rails_91decb8ef0"
+FOREIGN KEY ("note_id")
+  REFERENCES "notes" ("id")
+)[0m
+  ↳ db/migrate/20190220125141_create_sharenotes.rb:6
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE  INDEX "index_sharenotes_on_user_id" ON "sharenotes" ("user_id")[0m
+  ↳ db/migrate/20190220125141_create_sharenotes.rb:6
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE  INDEX "index_sharenotes_on_note_id" ON "sharenotes" ("note_id")[0m
+  ↳ db/migrate/20190220125141_create_sharenotes.rb:6
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20190220125141"]]
+  ↳ bin/rails:11
+  [1m[35m (3.9ms)[0m  [1m[36mcommit transaction[0m
+  ↳ bin/rails:11
+Migrating to AddEditAndViewPermissionToShareNote (20190223050912)
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ bin/rails:11
+  [1m[35m (1.0ms)[0m  [1m[35mALTER TABLE "sharenotes" ADD "view" boolean DEFAULT 0[0m
+  ↳ db/migrate/20190223050912_add_edit_and_view_permission_to_share_note.rb:6
+  [1m[35m (0.4ms)[0m  [1m[35mALTER TABLE "sharenotes" ADD "edit" boolean DEFAULT 0[0m
+  ↳ db/migrate/20190223050912_add_edit_and_view_permission_to_share_note.rb:7
+  [1m[36mActiveRecord::SchemaMigration Create (0.6ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20190223050912"]]
+  ↳ bin/rails:11
+  [1m[35m (1.6ms)[0m  [1m[36mcommit transaction[0m
+  ↳ bin/rails:11
+Migrating to RemoveViewFromSharenotes (20190225064228)
+  [1m[35m (0.2ms)[0m  [1m[36mbegin transaction[0m
+  ↳ bin/rails:11
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE TEMPORARY TABLE "asharenotes" ("id" integer NOT NULL PRIMARY KEY, "email" varchar DEFAULT NULL, "user_id" integer DEFAULT NULL, "note_id" integer DEFAULT NULL, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL, "view" boolean DEFAULT 0, "edit" boolean DEFAULT 0)[0m
+  ↳ db/migrate/20190225064228_remove_view_from_sharenotes.rb:6
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE  INDEX "tindex_asharenotes_on_note_id" ON "asharenotes" ("note_id")[0m
+  ↳ db/migrate/20190225064228_remove_view_from_sharenotes.rb:6
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE  INDEX "tindex_asharenotes_on_user_id" ON "asharenotes" ("user_id")[0m
+  ↳ db/migrate/20190225064228_remove_view_from_sharenotes.rb:6
+  [1m[35m (0.1ms)[0m  [1m[32mINSERT INTO "asharenotes" ("id","email","user_id","note_id","created_at","updated_at","view","edit")
+                     SELECT "id","email","user_id","note_id","created_at","updated_at","view","edit" FROM "sharenotes"[0m
+  ↳ db/migrate/20190225064228_remove_view_from_sharenotes.rb:6
+  [1m[35m (0.8ms)[0m  [1m[35mDROP TABLE "sharenotes"[0m
+  ↳ db/migrate/20190225064228_remove_view_from_sharenotes.rb:6
+  [1m[35m (1.0ms)[0m  [1m[35mCREATE TABLE "sharenotes" ("id" integer NOT NULL PRIMARY KEY, "email" varchar DEFAULT NULL, "user_id" integer DEFAULT NULL, "note_id" integer DEFAULT NULL, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL, "edit" boolean DEFAULT 0)[0m
+  ↳ db/migrate/20190225064228_remove_view_from_sharenotes.rb:6
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE  INDEX "index_sharenotes_on_user_id" ON "sharenotes" ("user_id")[0m
+  ↳ db/migrate/20190225064228_remove_view_from_sharenotes.rb:6
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE  INDEX "index_sharenotes_on_note_id" ON "sharenotes" ("note_id")[0m
+  ↳ db/migrate/20190225064228_remove_view_from_sharenotes.rb:6
+  [1m[35m (0.1ms)[0m  [1m[32mINSERT INTO "sharenotes" ("id","email","user_id","note_id","created_at","updated_at","edit")
+                     SELECT "id","email","user_id","note_id","created_at","updated_at","edit" FROM "asharenotes"[0m
+  ↳ db/migrate/20190225064228_remove_view_from_sharenotes.rb:6
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE "asharenotes"[0m
+  ↳ db/migrate/20190225064228_remove_view_from_sharenotes.rb:6
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20190225064228"]]
+  ↳ bin/rails:11
+  [1m[35m (1.3ms)[0m  [1m[36mcommit transaction[0m
+  ↳ bin/rails:11
+Migrating to AddViewToSharenotes (20190225064308)
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ bin/rails:11
+  [1m[35m (1.5ms)[0m  [1m[35mALTER TABLE "sharenotes" ADD "view" boolean DEFAULT 1[0m
+  ↳ db/migrate/20190225064308_add_view_to_sharenotes.rb:6
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20190225064308"]]
+  ↳ bin/rails:11
+  [1m[35m (4.8ms)[0m  [1m[36mcommit transaction[0m
+  ↳ bin/rails:11
+Migrating to DeviseCreateAdminUsers (20190306045006)
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ bin/rails:11
+  [1m[35m (0.9ms)[0m  [1m[35mCREATE TABLE "admin_users" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "email" varchar DEFAULT '' NOT NULL, "encrypted_password" varchar DEFAULT '' NOT NULL, "reset_password_token" varchar, "reset_password_sent_at" datetime, "remember_created_at" datetime, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  ↳ db/migrate/20190306045006_devise_create_admin_users.rb:6
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_admin_users_on_email" ON "admin_users" ("email")[0m
+  ↳ db/migrate/20190306045006_devise_create_admin_users.rb:39
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_admin_users_on_reset_password_token" ON "admin_users" ("reset_password_token")[0m
+  ↳ db/migrate/20190306045006_devise_create_admin_users.rb:40
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20190306045006"]]
+  ↳ bin/rails:11
+  [1m[35m (1.2ms)[0m  [1m[36mcommit transaction[0m
+  ↳ bin/rails:11
+Migrating to CreateActiveAdminComments (20190306045010)
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ bin/rails:11
+  [1m[35m (0.8ms)[0m  [1m[35mCREATE TABLE "active_admin_comments" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "namespace" varchar, "body" text, "resource_type" varchar, "resource_id" integer, "author_type" varchar, "author_id" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  ↳ db/migrate/20190306045010_create_active_admin_comments.rb:6
+  [1m[35m (0.6ms)[0m  [1m[35mCREATE  INDEX "index_active_admin_comments_on_resource_type_and_resource_id" ON "active_admin_comments" ("resource_type", "resource_id")[0m
+  ↳ db/migrate/20190306045010_create_active_admin_comments.rb:6
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE  INDEX "index_active_admin_comments_on_author_type_and_author_id" ON "active_admin_comments" ("author_type", "author_id")[0m
+  ↳ db/migrate/20190306045010_create_active_admin_comments.rb:6
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE  INDEX "index_active_admin_comments_on_namespace" ON "active_admin_comments" ("namespace")[0m
+  ↳ db/migrate/20190306045010_create_active_admin_comments.rb:13
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20190306045010"]]
+  ↳ bin/rails:11
+  [1m[35m (1.4ms)[0m  [1m[36mcommit transaction[0m
+  ↳ bin/rails:11
+Migrating to AddPriceToNote (20190308050650)
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ bin/rails:11
+  [1m[35m (0.8ms)[0m  [1m[35mALTER TABLE "notes" ADD "price" decimal DEFAULT 100[0m
+  ↳ db/migrate/20190308050650_add_price_to_note.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (0.6ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20190308050650"]]
+  ↳ bin/rails:11
+  [1m[35m (1.8ms)[0m  [1m[36mcommit transaction[0m
+  ↳ bin/rails:11
+Migrating to CreateCharges (20190309052024)
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ bin/rails:11
+  [1m[35m (1.1ms)[0m  [1m[35mCREATE TABLE "charges" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "token" varchar, "type" varchar, "email" varchar, "amount" decimal, "payed" boolean, "refund" boolean DEFAULT 0, "note_id" integer, "user_id" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL, CONSTRAINT "fk_rails_c46480beb6"
+FOREIGN KEY ("note_id")
+  REFERENCES "notes" ("id")
+, CONSTRAINT "fk_rails_534454e0f6"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+)[0m
+  ↳ db/migrate/20190309052024_create_charges.rb:3
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE  INDEX "index_charges_on_note_id" ON "charges" ("note_id")[0m
+  ↳ db/migrate/20190309052024_create_charges.rb:3
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE  INDEX "index_charges_on_user_id" ON "charges" ("user_id")[0m
+  ↳ db/migrate/20190309052024_create_charges.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20190309052024"]]
+  ↳ bin/rails:11
+  [1m[35m (2.8ms)[0m  [1m[36mcommit transaction[0m
+  ↳ bin/rails:11
+Migrating to AddCustomerIdToNote (20190311102039)
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ bin/rails:11
+  [1m[35m (0.9ms)[0m  [1m[35mALTER TABLE "notes" ADD "customer_id" integer[0m
+  ↳ db/migrate/20190311102039_add_customer_id_to_note.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20190311102039"]]
+  ↳ bin/rails:11
+  [1m[35m (1.3ms)[0m  [1m[36mcommit transaction[0m
+  ↳ bin/rails:11
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  ↳ bin/rails:11
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ bin/rails:11
+  [1m[36mActiveRecord::InternalMetadata Create (0.8ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["key", "environment"], ["value", "development"], ["created_at", "2019-03-11 12:19:41.740811"], ["updated_at", "2019-03-11 12:19:41.740811"]]
+  ↳ bin/rails:11
+  [1m[35m (1.1ms)[0m  [1m[36mcommit transaction[0m
+  ↳ bin/rails:11
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:11
+Started GET "/" for 127.0.0.1 at 2019-03-11 17:50:50 +0530
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+Processing by NotesController#index as HTML
+Completed 401 Unauthorized in 43ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2019-03-11 17:50:51 +0530
+Processing by Devise::SessionsController#new as HTML
+  Rendering devise/sessions/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (1.6ms)
+  Rendered devise/sessions/new.html.erb within layouts/application (21.2ms)
+Started GET "/users/sign_in" for 127.0.0.1 at 2019-03-11 17:50:54 +0530
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+Processing by Devise::SessionsController#new as HTML
+  Rendering devise/sessions/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (2.7ms)
+  Rendered devise/sessions/new.html.erb within layouts/application (18.0ms)
+Completed 200 OK in 12467ms (Views: 12426.9ms | ActiveRecord: 1.2ms)
+
+
+Completed 200 OK in 16057ms (Views: 16021.8ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2019-03-11 17:51:11 +0530
+Processing by Devise::SessionsController#new as HTML
+  Rendering devise/sessions/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (1.5ms)
+  Rendered devise/sessions/new.html.erb within layouts/application (8.2ms)
+Completed 200 OK in 210ms (Views: 208.5ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users/sign_up" for 127.0.0.1 at 2019-03-11 17:51:12 +0530
+Processing by Devise::RegistrationsController#new as HTML
+  Rendering devise/registrations/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (1.4ms)
+  Rendered devise/registrations/new.html.erb within layouts/application (25.5ms)
+Completed 200 OK in 162ms (Views: 160.3ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users/sign_in" for 127.0.0.1 at 2019-03-11 17:51:21 +0530
+Processing by Devise::SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"jrIDJ2t/UjQ8q9v6CH1tO1dGJlpNlF9TeTD0YqpDdmqIOy3weAoKQ5KsRUhlyHtSxgPTr5g4JH3r4mBFziF4rw==", "user"=>{"email"=>"dg@narola.email", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+  [1m[36mUser Load (3.8ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."email" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["email", "dg@narola.email"], ["LIMIT", 1]]
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+Completed 401 Unauthorized in 32ms (ActiveRecord: 3.8ms)
+
+
+Processing by Devise::SessionsController#new as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"jrIDJ2t/UjQ8q9v6CH1tO1dGJlpNlF9TeTD0YqpDdmqIOy3weAoKQ5KsRUhlyHtSxgPTr5g4JH3r4mBFziF4rw==", "user"=>{"email"=>"dg@narola.email", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+  Rendering devise/sessions/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (1.1ms)
+  Rendered devise/sessions/new.html.erb within layouts/application (6.7ms)
+Completed 200 OK in 346ms (Views: 192.3ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users/sign_up" for 127.0.0.1 at 2019-03-11 17:51:23 +0530
+Processing by Devise::RegistrationsController#new as HTML
+  Rendering devise/registrations/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (1.6ms)
+  Rendered devise/registrations/new.html.erb within layouts/application (8.0ms)
+Completed 200 OK in 137ms (Views: 135.5ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users" for 127.0.0.1 at 2019-03-11 17:51:43 +0530
+Processing by Devise::RegistrationsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"lEk8ipj2lv3HyUKgEm8uywh7yd0+dTAKDtcFSuDhqLSR/wLG8SnkDHbeHmEOx0DdxSnfUBjujTipBmnJWdztXg==", "user"=>{"email"=>"dg@narola.email", "username"=>"dharani", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "image"=>#<ActionDispatch::Http::UploadedFile:0x00007ff17bcb0060 @tempfile=#<Tempfile:/var/folders/p5/6pt6gjv91gz96133gwycgkkh0000gn/T/RackMultipart20190311-18226-yipncp.jpeg>, @original_filename="jenelia.jpeg", @content_type="image/jpeg", @headers="Content-Disposition: form-data; name=\"user[image]\"; filename=\"jenelia.jpeg\"\r\nContent-Type: image/jpeg\r\n">}, "commit"=>"Sign up"}
+[36m  Disk Storage (3.0ms) [0m[32mUploaded file to key: 5JucUGXCxeUsnJKcTawUs5sn (checksum: zZMxEVIqMenX+4eF2iRE6g==)[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  [1m[36mActiveStorage::Blob Create (8.7ms)[0m  [1m[32mINSERT INTO "active_storage_blobs" ("key", "filename", "content_type", "metadata", "byte_size", "checksum", "created_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["key", "5JucUGXCxeUsnJKcTawUs5sn"], ["filename", "jenelia.jpeg"], ["content_type", "image/jpeg"], ["metadata", "{\"identified\":true}"], ["byte_size", 10380], ["checksum", "zZMxEVIqMenX+4eF2iRE6g=="], ["created_at", "2019-03-11 12:21:43.781845"]]
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  [1m[35m (1.7ms)[0m  [1m[36mcommit transaction[0m
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  [1m[35m (0.2ms)[0m  [1m[36mcommit transaction[0m
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  [1m[36mUser Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "dg@narola.email"], ["LIMIT", 1]]
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  [1m[36mUser Create (20.8ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "username", "confirmation_token", "confirmation_sent_at", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["email", "dg@narola.email"], ["encrypted_password", "$2a$11$G/f.UnOzYHspLUK5CPvJ7O6qI3RVWqBFx1wFwBCGR3Ewy3baFH2vm"], ["username", "dharani"], ["confirmation_token", "yZxHwMyP84bBYM8MucKe"], ["confirmation_sent_at", "2019-03-11 12:21:43.836422"], ["created_at", "2019-03-11 12:21:43.834245"], ["updated_at", "2019-03-11 12:21:43.834245"]]
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  [1m[36mActiveStorage::Attachment Create (0.8ms)[0m  [1m[32mINSERT INTO "active_storage_attachments" ("name", "record_type", "record_id", "blob_id", "created_at") VALUES (?, ?, ?, ?, ?)[0m  [["name", "image"], ["record_type", "User"], ["record_id", 1], ["blob_id", 1], ["created_at", "2019-03-11 12:21:43.863441"]]
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  [1m[36mUser Update (0.3ms)[0m  [1m[33mUPDATE "users" SET "updated_at" = ? WHERE "users"."id" = ?[0m  [["updated_at", "2019-03-11 12:21:43.868292"], ["id", 1]]
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  [1m[35m (1.5ms)[0m  [1m[36mcommit transaction[0m
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+Completed 500 Internal Server Error in 2116ms (ActiveRecord: 36.8ms)
+
+
+  
+NoMethodError (undefined method `customer_id=' for #<User:0x00007ff17be4b640>):
+  
+app/models/user.rb:19:in `assign_customer_id'
+Started POST "/users" for 127.0.0.1 at 2019-03-11 17:52:40 +0530
+Processing by Devise::RegistrationsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"lEk8ipj2lv3HyUKgEm8uywh7yd0+dTAKDtcFSuDhqLSR/wLG8SnkDHbeHmEOx0DdxSnfUBjujTipBmnJWdztXg==", "user"=>{"email"=>"dg@narola.email", "username"=>"dharani", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "image"=>#<ActionDispatch::Http::UploadedFile:0x00007ff1785aead0 @tempfile=#<Tempfile:/var/folders/p5/6pt6gjv91gz96133gwycgkkh0000gn/T/RackMultipart20190311-18225-e5r9c0.jpeg>, @original_filename="jenelia.jpeg", @content_type="image/jpeg", @headers="Content-Disposition: form-data; name=\"user[image]\"; filename=\"jenelia.jpeg\"\r\nContent-Type: image/jpeg\r\n">}, "commit"=>"Sign up"}
+[36m  Disk Storage (2.2ms) [0m[32mUploaded file to key: ePpoDgdgn3BmxM2rAXA1Ewbe (checksum: zZMxEVIqMenX+4eF2iRE6g==)[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  [1m[36mActiveStorage::Blob Create (0.8ms)[0m  [1m[32mINSERT INTO "active_storage_blobs" ("key", "filename", "content_type", "metadata", "byte_size", "checksum", "created_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["key", "ePpoDgdgn3BmxM2rAXA1Ewbe"], ["filename", "jenelia.jpeg"], ["content_type", "image/jpeg"], ["metadata", "{\"identified\":true}"], ["byte_size", 10380], ["checksum", "zZMxEVIqMenX+4eF2iRE6g=="], ["created_at", "2019-03-11 12:22:41.213098"]]
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  [1m[35m (1.2ms)[0m  [1m[36mcommit transaction[0m
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  [1m[35m (0.2ms)[0m  [1m[36mbegin transaction[0m
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  [1m[35m (0.1ms)[0m  [1m[36mcommit transaction[0m
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  [1m[36mUser Exists (5.8ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "dg@narola.email"], ["LIMIT", 1]]
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  [1m[35m (0.1ms)[0m  [1m[31mrollback transaction[0m
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  Rendering devise/registrations/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (1.7ms)
+  Rendered devise/registrations/new.html.erb within layouts/application (10.3ms)
+Completed 200 OK in 510ms (Views: 201.3ms | ActiveRecord: 11.0ms)
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2019-03-11 17:52:46 +0530
+Processing by Devise::SessionsController#new as HTML
+  Rendering devise/sessions/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (1.9ms)
+  Rendered devise/sessions/new.html.erb within layouts/application (10.8ms)
+Completed 200 OK in 219ms (Views: 217.0ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users/sign_in" for 127.0.0.1 at 2019-03-11 17:52:53 +0530
+Processing by Devise::SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"p+NQUp8Sz1/GoSIts3Vk/uvn5x2NwWFXk74x5E4yqTs6c4JGIWk92/7qSxvC+Yip9H1ROsj0LY5TnpZ60BbkKA==", "user"=>{"email"=>"dg@narola.email", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."email" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["email", "dg@narola.email"], ["LIMIT", 1]]
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  [1m[35m (0.1ms)[0m  [1m[36mcommit transaction[0m
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+Completed 401 Unauthorized in 154ms (ActiveRecord: 0.5ms)
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2019-03-11 17:52:53 +0530
+Processing by Devise::SessionsController#new as HTML
+  Rendering devise/sessions/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (1.1ms)
+  Rendered devise/sessions/new.html.erb within layouts/application (7.4ms)
+Completed 200 OK in 244ms (Views: 243.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users/confirmation/new" for 127.0.0.1 at 2019-03-11 17:52:55 +0530
+Processing by ConfirmationsController#new as HTML
+  Rendering devise/confirmations/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (1.2ms)
+  Rendered devise/confirmations/new.html.erb within layouts/application (5.5ms)
+Completed 200 OK in 173ms (Views: 159.4ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users/confirmation" for 127.0.0.1 at 2019-03-11 17:53:00 +0530
+Processing by ConfirmationsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"FgDNGJGDqPvyWIjFZBcJ2Mn76za8O1LUJMMRIceqn+Njq8uEVz3atpHntS1M1rq7IEXZwiJnIdTcgFxsqmSI6A==", "user"=>{"email"=>"dg@narola.email"}, "commit"=>"Resend confirmation instructions"}
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."unconfirmed_email" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["unconfirmed_email", "dg@narola.email"], ["LIMIT", 1]]
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."email" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["email", "dg@narola.email"], ["LIMIT", 1]]
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  [1m[35m (0.1ms)[0m  [1m[36mcommit transaction[0m
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  Rendering devise/mailer/confirmation_instructions.html.erb
+  Rendered devise/mailer/confirmation_instructions.html.erb (1.3ms)
+Devise::Mailer#confirmation_instructions: processed outbound mail in 968.4ms
+Sent mail to dg@narola.email (45.2ms)
+Date: Mon, 11 Mar 2019 17:53:02 +0530
+From: narolarubydeveloper1@gmail.com
+To: dg@narola.email
+Message-ID: <5c8653262e220_47313ff8bb1e30a493558@C100-74s-iMac.local.mail>
+Subject: Confirmation instructions
+Mime-Version: 1.0
+Content-Type: text/html;
+ charset=UTF-8
+Content-Transfer-Encoding: 7bit
+
+<p>Welcome dg@narola.email!</p>
+
+<p>You can confirm your account email through the link below:</p>
+
+<p><a href="http://localhost:3000/users/confirmation?confirmation_token=yZxHwMyP84bBYM8MucKe">Confirm my account</a></p>
+
+Redirected to http://localhost:3000/users/sign_in
+Completed 302 Found in 1641ms (ActiveRecord: 1.2ms)
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2019-03-11 17:53:02 +0530
+Processing by Devise::SessionsController#new as HTML
+  Rendering devise/sessions/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (1.9ms)
+  Rendered devise/sessions/new.html.erb within layouts/application (12.2ms)
+Completed 200 OK in 197ms (Views: 195.2ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users/confirmation?confirmation_token=yZxHwMyP84bBYM8MucKe" for 127.0.0.1 at 2019-03-11 17:53:04 +0530
+Processing by ConfirmationsController#show as HTML
+  Parameters: {"confirmation_token"=>"yZxHwMyP84bBYM8MucKe"}
+  [1m[36mUser Load (1.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."confirmation_token" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["confirmation_token", "yZxHwMyP84bBYM8MucKe"], ["LIMIT", 1]]
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  [1m[35m (0.2ms)[0m  [1m[36mbegin transaction[0m
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  [1m[36mUser Update (0.8ms)[0m  [1m[33mUPDATE "users" SET "confirmed_at" = ?, "updated_at" = ? WHERE "users"."id" = ?[0m  [["confirmed_at", "2019-03-11 12:23:04.608269"], ["updated_at", "2019-03-11 12:23:04.609903"], ["id", 1]]
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  [1m[35m (1.6ms)[0m  [1m[36mcommit transaction[0m
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+Redirected to http://localhost:3000/notes
+Completed 302 Found in 20ms (ActiveRecord: 3.7ms)
+
+
+Started GET "/notes" for 127.0.0.1 at 2019-03-11 17:53:04 +0530
+Processing by NotesController#index as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  Rendering notes/index.html.erb within layouts/application
+  [1m[36mNote Load (2.4ms)[0m  [1m[34mSELECT "notes".* FROM "notes" WHERE "notes"."user_id" = ? AND "notes"."status" = ? ORDER BY created_at DESC[0m  [["user_id", 1], ["status", 0]]
+  ↳ app/views/notes/_side.html.erb:14
+  Rendered notes/_side.html.erb (5.1ms)
+  Rendered notes/index.html.erb within layouts/application (9.0ms)
+  Rendered devise/shared/_navigation.html.erb (1.2ms)
+Completed 200 OK in 249ms (Views: 218.0ms | ActiveRecord: 3.3ms)
+
+
+Started GET "/notes" for 127.0.0.1 at 2019-03-11 17:53:07 +0530
+Processing by NotesController#index as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  Rendering notes/index.html.erb within layouts/application
+  [1m[36mNote Load (0.3ms)[0m  [1m[34mSELECT "notes".* FROM "notes" WHERE "notes"."user_id" = ? AND "notes"."status" = ? ORDER BY created_at DESC[0m  [["user_id", 1], ["status", 0]]
+  ↳ app/views/notes/_side.html.erb:14
+  Rendered notes/_side.html.erb (2.6ms)
+  Rendered notes/index.html.erb within layouts/application (6.6ms)
+  Rendered devise/shared/_navigation.html.erb (1.0ms)
+Completed 200 OK in 166ms (Views: 160.1ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/notes" for 127.0.0.1 at 2019-03-11 17:53:10 +0530
+Processing by NotesController#index as JS
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  Rendering notes/index.js.erb
+  [1m[36mNote Load (0.3ms)[0m  [1m[34mSELECT "notes".* FROM "notes" WHERE "notes"."user_id" = ? AND "notes"."status" = ? ORDER BY created_at DESC[0m  [["user_id", 1], ["status", 0]]
+  ↳ app/views/notes/_index.html.erb:14
+  Rendered notes/_index.html.erb (2.3ms)
+  Rendered notes/index.js.erb (44.5ms)
+Completed 200 OK in 158ms (Views: 108.6ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/notes" for 127.0.0.1 at 2019-03-11 17:53:12 +0530
+Processing by NotesController#index as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  Rendering notes/index.html.erb within layouts/application
+  [1m[36mNote Load (0.2ms)[0m  [1m[34mSELECT "notes".* FROM "notes" WHERE "notes"."user_id" = ? AND "notes"."status" = ? ORDER BY created_at DESC[0m  [["user_id", 1], ["status", 0]]
+  ↳ app/views/notes/_side.html.erb:14
+  Rendered notes/_side.html.erb (2.5ms)
+  Rendered notes/index.html.erb within layouts/application (6.6ms)
+  Rendered devise/shared/_navigation.html.erb (1.1ms)
+Completed 200 OK in 205ms (Views: 197.9ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/notes" for 127.0.0.1 at 2019-03-11 17:54:08 +0530
+Processing by NotesController#index as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  Rendering notes/index.html.erb within layouts/application
+  [1m[36mNote Load (0.5ms)[0m  [1m[34mSELECT "notes".* FROM "notes" WHERE "notes"."user_id" = ? AND "notes"."status" = ? ORDER BY created_at DESC[0m  [["user_id", 1], ["status", 0]]
+  ↳ app/views/notes/_side.html.erb:14
+  Rendered notes/_side.html.erb (7.9ms)
+  Rendered notes/index.html.erb within layouts/application (12.9ms)
+  Rendered devise/shared/_navigation.html.erb (1.1ms)
+Completed 200 OK in 273ms (Views: 224.2ms | ActiveRecord: 2.0ms)
+
+
+Started GET "/notes/search?utf8=%E2%9C%93&search_notes%5Bquery%5D=demo&commit=Search" for 127.0.0.1 at 2019-03-11 17:54:11 +0530
+Processing by NotesController#search as JS
+  Parameters: {"utf8"=>"✓", "search_notes"=>{"query"=>"demo"}, "commit"=>"Search"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  [1m[36mNote Load (0.2ms)[0m  [1m[34mSELECT "notes".* FROM "notes" INNER JOIN "taggings" "note_taggings_89e495e" ON "note_taggings_89e495e"."taggable_id" = "notes"."id" AND "note_taggings_89e495e"."taggable_type" = 'Note' AND "note_taggings_89e495e"."tag_id" IN (SELECT "tags"."id" FROM "tags" WHERE LOWER("tags"."name") LIKE 'demo' ESCAPE '!')[0m
+  ↳ app/controllers/notes_controller.rb:34
+  Rendering notes/search.js.erb
+  Rendered notes/_search.html.erb (2.1ms)
+  Rendered notes/search.js.erb (46.9ms)
+Completed 200 OK in 465ms (Views: 111.9ms | ActiveRecord: 1.1ms)
+
+
+Started GET "/notes" for 127.0.0.1 at 2019-03-11 17:54:14 +0530
+Processing by NotesController#index as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  Rendering notes/index.html.erb within layouts/application
+  [1m[36mNote Load (0.2ms)[0m  [1m[34mSELECT "notes".* FROM "notes" WHERE "notes"."user_id" = ? AND "notes"."status" = ? ORDER BY created_at DESC[0m  [["user_id", 1], ["status", 0]]
+  ↳ app/views/notes/_side.html.erb:14
+  Rendered notes/_side.html.erb (2.4ms)
+  Rendered notes/index.html.erb within layouts/application (5.8ms)
+  Rendered devise/shared/_navigation.html.erb (1.1ms)
+Completed 200 OK in 136ms (Views: 129.5ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/notes/search?utf8=%E2%9C%93&search_notes%5Bquery%5D=deom&commit=Search" for 127.0.0.1 at 2019-03-11 17:54:19 +0530
+Processing by NotesController#search as JS
+  Parameters: {"utf8"=>"✓", "search_notes"=>{"query"=>"deom"}, "commit"=>"Search"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  [1m[36mNote Load (0.2ms)[0m  [1m[34mSELECT "notes".* FROM "notes" INNER JOIN "taggings" "note_taggings_810006a" ON "note_taggings_810006a"."taggable_id" = "notes"."id" AND "note_taggings_810006a"."taggable_type" = 'Note' AND "note_taggings_810006a"."tag_id" IN (SELECT "tags"."id" FROM "tags" WHERE LOWER("tags"."name") LIKE 'deom' ESCAPE '!')[0m
+  ↳ app/controllers/notes_controller.rb:34
+  Rendering notes/search.js.erb
+  Rendered notes/_search.html.erb (2.8ms)
+  Rendered notes/search.js.erb (50.8ms)
+Completed 200 OK in 200ms (Views: 117.5ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/notes" for 127.0.0.1 at 2019-03-11 17:54:21 +0530
+Processing by NotesController#index as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  Rendering notes/index.html.erb within layouts/application
+  [1m[36mNote Load (0.3ms)[0m  [1m[34mSELECT "notes".* FROM "notes" WHERE "notes"."user_id" = ? AND "notes"."status" = ? ORDER BY created_at DESC[0m  [["user_id", 1], ["status", 0]]
+  ↳ app/views/notes/_side.html.erb:14
+  Rendered notes/_side.html.erb (4.6ms)
+  Rendered notes/index.html.erb within layouts/application (10.0ms)
+  Rendered devise/shared/_navigation.html.erb (1.7ms)
+Completed 200 OK in 215ms (Views: 209.0ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/notes/sharenotes/index" for 127.0.0.1 at 2019-03-11 17:54:44 +0530
+Processing by SharenotesController#index as JS
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  Rendering sharenotes/index.js.erb
+  [1m[35mSQL (0.3ms)[0m  [1m[34mSELECT "sharenotes"."id" AS t0_r0, "sharenotes"."email" AS t0_r1, "sharenotes"."user_id" AS t0_r2, "sharenotes"."note_id" AS t0_r3, "sharenotes"."created_at" AS t0_r4, "sharenotes"."updated_at" AS t0_r5, "sharenotes"."edit" AS t0_r6, "sharenotes"."view" AS t0_r7, "notes"."id" AS t1_r0, "notes"."title" AS t1_r1, "notes"."description" AS t1_r2, "notes"."status" AS t1_r3, "notes"."user_id" AS t1_r4, "notes"."created_at" AS t1_r5, "notes"."updated_at" AS t1_r6, "notes"."important" AS t1_r7, "notes"."price" AS t1_r8, "notes"."customer_id" AS t1_r9, "users"."id" AS t2_r0, "users"."email" AS t2_r1, "users"."encrypted_password" AS t2_r2, "users"."image" AS t2_r3, "users"."username" AS t2_r4, "users"."reset_password_token" AS t2_r5, "users"."reset_password_sent_at" AS t2_r6, "users"."remember_created_at" AS t2_r7, "users"."confirmation_token" AS t2_r8, "users"."confirmed_at" AS t2_r9, "users"."confirmation_sent_at" AS t2_r10, "users"."unconfirmed_email" AS t2_r11, "users"."created_at" AS t2_r12, "users"."updated_at" AS t2_r13, "users"."autosave" AS t2_r14 FROM "sharenotes" LEFT OUTER JOIN "notes" ON "notes"."id" = "sharenotes"."note_id" LEFT OUTER JOIN "users" ON "users"."id" = "sharenotes"."user_id" WHERE "sharenotes"."email" = ? AND "notes"."status" = ?[0m  [["email", "dg@narola.email"], ["status", 0]]
+  ↳ app/views/sharenotes/_index.html.erb:19
+  Rendered sharenotes/_index.html.erb (13.0ms)
+  Rendered sharenotes/index.js.erb (59.0ms)
+Completed 200 OK in 184ms (Views: 123.5ms | ActiveRecord: 1.2ms)
+
+
+Started GET "/notes/sharenotes/shownote" for 127.0.0.1 at 2019-03-11 17:54:46 +0530
+Processing by SharenotesController#shownote as JS
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  Rendering sharenotes/shownote.js.erb
+  [1m[35mSQL (0.5ms)[0m  [1m[34mSELECT "sharenotes"."id" AS t0_r0, "sharenotes"."email" AS t0_r1, "sharenotes"."user_id" AS t0_r2, "sharenotes"."note_id" AS t0_r3, "sharenotes"."created_at" AS t0_r4, "sharenotes"."updated_at" AS t0_r5, "sharenotes"."edit" AS t0_r6, "sharenotes"."view" AS t0_r7, "notes"."id" AS t1_r0, "notes"."title" AS t1_r1, "notes"."description" AS t1_r2, "notes"."status" AS t1_r3, "notes"."user_id" AS t1_r4, "notes"."created_at" AS t1_r5, "notes"."updated_at" AS t1_r6, "notes"."important" AS t1_r7, "notes"."price" AS t1_r8, "notes"."customer_id" AS t1_r9, "users"."id" AS t2_r0, "users"."email" AS t2_r1, "users"."encrypted_password" AS t2_r2, "users"."image" AS t2_r3, "users"."username" AS t2_r4, "users"."reset_password_token" AS t2_r5, "users"."reset_password_sent_at" AS t2_r6, "users"."remember_created_at" AS t2_r7, "users"."confirmation_token" AS t2_r8, "users"."confirmed_at" AS t2_r9, "users"."confirmation_sent_at" AS t2_r10, "users"."unconfirmed_email" AS t2_r11, "users"."created_at" AS t2_r12, "users"."updated_at" AS t2_r13, "users"."autosave" AS t2_r14 FROM "sharenotes" LEFT OUTER JOIN "notes" ON "notes"."id" = "sharenotes"."note_id" LEFT OUTER JOIN "users" ON "users"."id" = "sharenotes"."user_id" WHERE "sharenotes"."user_id" = ? AND "notes"."status" = ?[0m  [["user_id", 1], ["status", 0]]
+  ↳ app/views/sharenotes/_shownote.html.erb:19
+  Rendered sharenotes/_shownote.html.erb (8.2ms)
+  Rendered sharenotes/shownote.js.erb (71.6ms)
+Completed 200 OK in 228ms (Views: 165.2ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/notes/autosave" for 127.0.0.1 at 2019-03-11 17:54:50 +0530
+Processing by NotesController#autosave as JS
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/notes_controller.rb:104
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/notes_controller.rb:105
+  [1m[36mUser Update (0.4ms)[0m  [1m[33mUPDATE "users" SET "autosave" = ?, "updated_at" = ? WHERE "users"."id" = ?[0m  [["autosave", 1], ["updated_at", "2019-03-11 12:24:50.009003"], ["id", 1]]
+  ↳ app/controllers/notes_controller.rb:105
+  [1m[35m (0.8ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/notes_controller.rb:105
+Completed 200 OK in 11ms (Views: 0.2ms | ActiveRecord: 1.7ms)
+
+
+Started GET "/notes" for 127.0.0.1 at 2019-03-11 17:54:50 +0530
+Processing by NotesController#index as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  Rendering notes/index.html.erb within layouts/application
+  [1m[36mNote Load (0.2ms)[0m  [1m[34mSELECT "notes".* FROM "notes" WHERE "notes"."user_id" = ? AND "notes"."status" = ? ORDER BY created_at DESC[0m  [["user_id", 1], ["status", 0]]
+  ↳ app/views/notes/_side.html.erb:14
+  Rendered notes/_side.html.erb (2.5ms)
+  Rendered notes/index.html.erb within layouts/application (6.4ms)
+  Rendered devise/shared/_navigation.html.erb (1.2ms)
+Completed 200 OK in 146ms (Views: 136.0ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/notes/noautosave" for 127.0.0.1 at 2019-03-11 17:54:51 +0530
+Processing by NotesController#noautosave as JS
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/notes_controller.rb:116
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/notes_controller.rb:117
+  [1m[36mUser Update (0.5ms)[0m  [1m[33mUPDATE "users" SET "autosave" = ?, "updated_at" = ? WHERE "users"."id" = ?[0m  [["autosave", 0], ["updated_at", "2019-03-11 12:24:51.734478"], ["id", 1]]
+  ↳ app/controllers/notes_controller.rb:117
+  [1m[35m (0.9ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/notes_controller.rb:117
+Completed 200 OK in 10ms (Views: 0.1ms | ActiveRecord: 1.9ms)
+
+
+Started GET "/notes" for 127.0.0.1 at 2019-03-11 17:54:51 +0530
+Processing by NotesController#index as HTML
+  [1m[36mUser Load (1.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  Rendering notes/index.html.erb within layouts/application
+  [1m[36mNote Load (0.2ms)[0m  [1m[34mSELECT "notes".* FROM "notes" WHERE "notes"."user_id" = ? AND "notes"."status" = ? ORDER BY created_at DESC[0m  [["user_id", 1], ["status", 0]]
+  ↳ app/views/notes/_side.html.erb:14
+  Rendered notes/_side.html.erb (2.6ms)
+  Rendered notes/index.html.erb within layouts/application (7.4ms)
+  Rendered devise/shared/_navigation.html.erb (1.1ms)
+Completed 200 OK in 189ms (Views: 182.0ms | ActiveRecord: 1.3ms)
+
+
+Started GET "/notes/new" for 127.0.0.1 at 2019-03-11 17:54:52 +0530
+Processing by NotesController#new as JS
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  Rendering notes/new.js.erb
+  Rendered notes/_new.html.erb (205.3ms)
+  Rendered notes/new.js.erb (258.3ms)
+Completed 200 OK in 393ms (Views: 328.8ms | ActiveRecord: 1.5ms)
+
+
+Started POST "/notes" for 127.0.0.1 at 2019-03-11 17:55:05 +0530
+Processing by NotesController#create as JS
+  Parameters: {"utf8"=>"✓", "note"=>{"title"=>"Orientation", "description"=>"<p>English Class</p>", "price"=>"100.0", "tag_list"=>"funny,easy", "user_id"=>"1"}, "commit"=>"Create Note"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/notes_controller.rb:48
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/notes_controller.rb:48
+  [1m[36mNote Create (0.8ms)[0m  [1m[32mINSERT INTO "notes" ("title", "description", "user_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["title", "Orientation"], ["description", "<p>English Class</p>"], ["user_id", 1], ["created_at", "2019-03-11 12:25:05.469548"], ["updated_at", "2019-03-11 12:25:05.469548"]]
+  ↳ app/controllers/notes_controller.rb:48
+  [1m[36mActsAsTaggableOn::Tag Load (22.2ms)[0m  [1m[34mSELECT "tags".* FROM "tags" WHERE (LOWER(name) = LOWER('funny') OR LOWER(name) = LOWER('easy'))[0m
+  ↳ app/controllers/notes_controller.rb:48
+  [1m[36mActsAsTaggableOn::Tag Exists (0.2ms)[0m  [1m[34mSELECT  1 AS one FROM "tags" WHERE "tags"."name" = ? LIMIT ?[0m  [["name", "funny"], ["LIMIT", 1]]
+  ↳ app/controllers/notes_controller.rb:48
+  [1m[36mActsAsTaggableOn::Tag Create (0.5ms)[0m  [1m[32mINSERT INTO "tags" ("name") VALUES (?)[0m  [["name", "funny"]]
+  ↳ app/controllers/notes_controller.rb:48
+  [1m[36mActsAsTaggableOn::Tag Load (0.2ms)[0m  [1m[34mSELECT "tags".* FROM "tags" WHERE (LOWER(name) = LOWER('funny') OR LOWER(name) = LOWER('easy'))[0m
+  ↳ app/controllers/notes_controller.rb:48
+  [1m[36mActsAsTaggableOn::Tag Exists (0.1ms)[0m  [1m[34mSELECT  1 AS one FROM "tags" WHERE "tags"."name" = ? LIMIT ?[0m  [["name", "easy"], ["LIMIT", 1]]
+  ↳ app/controllers/notes_controller.rb:48
+  [1m[36mActsAsTaggableOn::Tag Create (0.1ms)[0m  [1m[32mINSERT INTO "tags" ("name") VALUES (?)[0m  [["name", "easy"]]
+  ↳ app/controllers/notes_controller.rb:48
+  [1m[36mActsAsTaggableOn::Tag Load (0.2ms)[0m  [1m[34mSELECT "tags".* FROM "tags" INNER JOIN "taggings" ON "tags"."id" = "taggings"."tag_id" WHERE "taggings"."taggable_id" = ? AND "taggings"."taggable_type" = ? AND (taggings.context = 'tags' AND taggings.tagger_id IS NULL)[0m  [["taggable_id", 1], ["taggable_type", "Note"]]
+  ↳ app/controllers/notes_controller.rb:48
+  [1m[36mActsAsTaggableOn::Tag Load (0.1ms)[0m  [1m[34mSELECT  "tags".* FROM "tags" WHERE "tags"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/notes_controller.rb:48
+  [1m[36mActsAsTaggableOn::Tagging Exists (0.2ms)[0m  [1m[34mSELECT  1 AS one FROM "taggings" WHERE "taggings"."tag_id" = ? AND "taggings"."taggable_type" = ? AND "taggings"."taggable_id" = ? AND "taggings"."context" = ? AND "taggings"."tagger_id" IS NULL AND "taggings"."tagger_type" IS NULL LIMIT ?[0m  [["tag_id", 1], ["taggable_type", "Note"], ["taggable_id", 1], ["context", "tags"], ["LIMIT", 1]]
+  ↳ app/controllers/notes_controller.rb:48
+  [1m[36mActsAsTaggableOn::Tagging Create (0.5ms)[0m  [1m[32mINSERT INTO "taggings" ("tag_id", "taggable_type", "taggable_id", "context", "created_at") VALUES (?, ?, ?, ?, ?)[0m  [["tag_id", 1], ["taggable_type", "Note"], ["taggable_id", 1], ["context", "tags"], ["created_at", "2019-03-11 12:25:05.525344"]]
+  ↳ app/controllers/notes_controller.rb:48
+  [1m[36mActsAsTaggableOn::Tag Update All (0.1ms)[0m  [1m[33mUPDATE "tags" SET "taggings_count" = COALESCE("taggings_count", 0) + 1 WHERE "tags"."id" = ?[0m  [["id", 1]]
+  ↳ app/controllers/notes_controller.rb:48
+  [1m[36mActsAsTaggableOn::Tag Load (0.2ms)[0m  [1m[34mSELECT  "tags".* FROM "tags" WHERE "tags"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/notes_controller.rb:48
+  [1m[36mActsAsTaggableOn::Tagging Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "taggings" WHERE "taggings"."tag_id" = ? AND "taggings"."taggable_type" = ? AND "taggings"."taggable_id" = ? AND "taggings"."context" = ? AND "taggings"."tagger_id" IS NULL AND "taggings"."tagger_type" IS NULL LIMIT ?[0m  [["tag_id", 2], ["taggable_type", "Note"], ["taggable_id", 1], ["context", "tags"], ["LIMIT", 1]]
+  ↳ app/controllers/notes_controller.rb:48
+  [1m[36mActsAsTaggableOn::Tagging Create (0.3ms)[0m  [1m[32mINSERT INTO "taggings" ("tag_id", "taggable_type", "taggable_id", "context", "created_at") VALUES (?, ?, ?, ?, ?)[0m  [["tag_id", 2], ["taggable_type", "Note"], ["taggable_id", 1], ["context", "tags"], ["created_at", "2019-03-11 12:25:05.533715"]]
+  ↳ app/controllers/notes_controller.rb:48
+  [1m[36mActsAsTaggableOn::Tag Update All (0.2ms)[0m  [1m[33mUPDATE "tags" SET "taggings_count" = COALESCE("taggings_count", 0) + 1 WHERE "tags"."id" = ?[0m  [["id", 2]]
+  ↳ app/controllers/notes_controller.rb:48
+  [1m[35m (2.6ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/notes_controller.rb:48
+Completed 200 OK in 163ms (Views: 0.1ms | ActiveRecord: 29.6ms)
+
+
+Started GET "/notes" for 127.0.0.1 at 2019-03-11 17:55:05 +0530
+Processing by NotesController#index as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  Rendering notes/index.html.erb within layouts/application
+  [1m[36mNote Load (0.5ms)[0m  [1m[34mSELECT "notes".* FROM "notes" WHERE "notes"."user_id" = ? AND "notes"."status" = ? ORDER BY created_at DESC[0m  [["user_id", 1], ["status", 0]]
+  ↳ app/views/notes/_side.html.erb:14
+  [1m[36mActsAsTaggableOn::Tagging Load (0.2ms)[0m  [1m[34mSELECT "taggings".* FROM "taggings" WHERE "taggings"."taggable_type" = ? AND "taggings"."taggable_id" = ?[0m  [["taggable_type", "Note"], ["taggable_id", 1]]
+  ↳ app/views/notes/_side.html.erb:14
+  [1m[36mActsAsTaggableOn::Tag Load (0.2ms)[0m  [1m[34mSELECT "tags".* FROM "tags" INNER JOIN "taggings" ON "tags"."id" = "taggings"."tag_id" WHERE "taggings"."taggable_id" = ? AND "taggings"."taggable_type" = ? AND (taggings.context = 'tags' AND taggings.tagger_id IS NULL)[0m  [["taggable_id", 1], ["taggable_type", "Note"]]
+  ↳ app/views/notes/_side.html.erb:37
+  Rendered notes/_side.html.erb (11.8ms)
+  Rendered notes/index.html.erb within layouts/application (18.4ms)
+  Rendered devise/shared/_navigation.html.erb (1.0ms)
+Completed 200 OK in 235ms (Views: 203.6ms | ActiveRecord: 1.4ms)
+
+
+Started GET "/notes/search?utf8=%E2%9C%93&search_notes%5Bquery%5D=demo&commit=Search" for 127.0.0.1 at 2019-03-11 17:55:11 +0530
+Processing by NotesController#search as JS
+  Parameters: {"utf8"=>"✓", "search_notes"=>{"query"=>"demo"}, "commit"=>"Search"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  [1m[36mNote Load (0.3ms)[0m  [1m[34mSELECT "notes".* FROM "notes" INNER JOIN "taggings" "note_taggings_89e495e" ON "note_taggings_89e495e"."taggable_id" = "notes"."id" AND "note_taggings_89e495e"."taggable_type" = 'Note' AND "note_taggings_89e495e"."tag_id" IN (SELECT "tags"."id" FROM "tags" WHERE LOWER("tags"."name") LIKE 'demo' ESCAPE '!')[0m
+  ↳ app/controllers/notes_controller.rb:34
+  Rendering notes/search.js.erb
+  Rendered notes/_search.html.erb (2.3ms)
+  Rendered notes/search.js.erb (67.3ms)
+Completed 200 OK in 256ms (Views: 167.3ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/notes" for 127.0.0.1 at 2019-03-11 17:55:12 +0530
+Processing by NotesController#index as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  Rendering notes/index.html.erb within layouts/application
+  [1m[36mNote Load (0.2ms)[0m  [1m[34mSELECT "notes".* FROM "notes" WHERE "notes"."user_id" = ? AND "notes"."status" = ? ORDER BY created_at DESC[0m  [["user_id", 1], ["status", 0]]
+  ↳ app/views/notes/_side.html.erb:14
+  [1m[36mActsAsTaggableOn::Tagging Load (0.2ms)[0m  [1m[34mSELECT "taggings".* FROM "taggings" WHERE "taggings"."taggable_type" = ? AND "taggings"."taggable_id" = ?[0m  [["taggable_type", "Note"], ["taggable_id", 1]]
+  ↳ app/views/notes/_side.html.erb:14
+  [1m[36mActsAsTaggableOn::Tag Load (0.3ms)[0m  [1m[34mSELECT "tags".* FROM "tags" INNER JOIN "taggings" ON "tags"."id" = "taggings"."tag_id" WHERE "taggings"."taggable_id" = ? AND "taggings"."taggable_type" = ? AND (taggings.context = 'tags' AND taggings.tagger_id IS NULL)[0m  [["taggable_id", 1], ["taggable_type", "Note"]]
+  ↳ app/views/notes/_side.html.erb:37
+  Rendered notes/_side.html.erb (8.4ms)
+  Rendered notes/index.html.erb within layouts/application (12.9ms)
+  Rendered devise/shared/_navigation.html.erb (1.0ms)
+Completed 200 OK in 154ms (Views: 147.7ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/users/edit" for 127.0.0.1 at 2019-03-11 17:56:22 +0530
+Processing by Devise::RegistrationsController#edit as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  Rendering devise/registrations/edit.html.erb within layouts/application
+  [1m[36mActiveStorage::Attachment Load (0.2ms)[0m  [1m[34mSELECT  "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = ? AND "active_storage_attachments"."record_type" = ? AND "active_storage_attachments"."name" = ? LIMIT ?[0m  [["record_id", 1], ["record_type", "User"], ["name", "image"], ["LIMIT", 1]]
+  ↳ app/views/devise/registrations/edit.html.erb:80
+  [1m[36mActiveStorage::Blob Load (0.2ms)[0m  [1m[34mSELECT  "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/devise/registrations/edit.html.erb:80
+  Rendered devise/registrations/edit.html.erb within layouts/application (53.1ms)
+  Rendered devise/shared/_navigation.html.erb (1.2ms)
+Completed 200 OK in 234ms (Views: 206.2ms | ActiveRecord: 2.8ms)
+
+
+Started GET "/rails/active_storage/blobs/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBCZz09IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--82436a8e09525f863879d0fba5273bf14a2ac74a/jenelia.jpeg" for 127.0.0.1 at 2019-03-11 17:56:22 +0530
+Processing by ActiveStorage::BlobsController#show as JPEG
+  Parameters: {"signed_id"=>"eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBCZz09IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--82436a8e09525f863879d0fba5273bf14a2ac74a", "filename"=>"jenelia"}
+  [1m[36mActiveStorage::Blob Load (0.2ms)[0m  [1m[34mSELECT  "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+[36m  Disk Storage (8.3ms) [0m[34mGenerated URL for file at key: 5JucUGXCxeUsnJKcTawUs5sn (http://localhost:3000/rails/active_storage/disk/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdDRG9JYTJWNVNTSWROVXAxWTFWSFdFTjRaVlZ6YmtwTFkxUmhkMVZ6TlhOdUJqb0dSVlE2RUdScGMzQnZjMmwwYVc5dVNTSkRhVzVzYVc1bE95Qm1hV3hsYm1GdFpUMGlhbVZ1Wld4cFlTNXFjR1ZuSWpzZ1ptbHNaVzVoYldVcVBWVlVSaTA0SnlkcVpXNWxiR2xoTG1wd1pXY0dPd1pVT2hGamIyNTBaVzUwWDNSNWNHVkpJZzlwYldGblpTOXFjR1ZuQmpzR1ZBPT0iLCJleHAiOiIyMDE5LTAzLTExVDEyOjMxOjIyLjkwN1oiLCJwdXIiOiJibG9iX2tleSJ9fQ==--792b1a2383f91caa5d10c5b48b0068c41e81cc10/jenelia.jpeg?content_type=image%2Fjpeg&disposition=inline%3B+filename%3D%22jenelia.jpeg%22%3B+filename%2A%3DUTF-8%27%27jenelia.jpeg)[0m
+Redirected to http://localhost:3000/rails/active_storage/disk/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdDRG9JYTJWNVNTSWROVXAxWTFWSFdFTjRaVlZ6YmtwTFkxUmhkMVZ6TlhOdUJqb0dSVlE2RUdScGMzQnZjMmwwYVc5dVNTSkRhVzVzYVc1bE95Qm1hV3hsYm1GdFpUMGlhbVZ1Wld4cFlTNXFjR1ZuSWpzZ1ptbHNaVzVoYldVcVBWVlVSaTA0SnlkcVpXNWxiR2xoTG1wd1pXY0dPd1pVT2hGamIyNTBaVzUwWDNSNWNHVkpJZzlwYldGblpTOXFjR1ZuQmpzR1ZBPT0iLCJleHAiOiIyMDE5LTAzLTExVDEyOjMxOjIyLjkwN1oiLCJwdXIiOiJibG9iX2tleSJ9fQ==--792b1a2383f91caa5d10c5b48b0068c41e81cc10/jenelia.jpeg?content_type=image%2Fjpeg&disposition=inline%3B+filename%3D%22jenelia.jpeg%22%3B+filename%2A%3DUTF-8%27%27jenelia.jpeg
+Completed 302 Found in 14ms (ActiveRecord: 0.2ms)
+
+
+Started GET "/rails/active_storage/disk/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdDRG9JYTJWNVNTSWROVXAxWTFWSFdFTjRaVlZ6YmtwTFkxUmhkMVZ6TlhOdUJqb0dSVlE2RUdScGMzQnZjMmwwYVc5dVNTSkRhVzVzYVc1bE95Qm1hV3hsYm1GdFpUMGlhbVZ1Wld4cFlTNXFjR1ZuSWpzZ1ptbHNaVzVoYldVcVBWVlVSaTA0SnlkcVpXNWxiR2xoTG1wd1pXY0dPd1pVT2hGamIyNTBaVzUwWDNSNWNHVkpJZzlwYldGblpTOXFjR1ZuQmpzR1ZBPT0iLCJleHAiOiIyMDE5LTAzLTExVDEyOjMxOjIyLjkwN1oiLCJwdXIiOiJibG9iX2tleSJ9fQ==--792b1a2383f91caa5d10c5b48b0068c41e81cc10/jenelia.jpeg?content_type=image%2Fjpeg&disposition=inline%3B+filename%3D%22jenelia.jpeg%22%3B+filename%2A%3DUTF-8%27%27jenelia.jpeg" for 127.0.0.1 at 2019-03-11 17:56:22 +0530
+Processing by ActiveStorage::DiskController#show as JPEG
+  Parameters: {"content_type"=>"image/jpeg", "disposition"=>"inline; filename=\"jenelia.jpeg\"; filename*=UTF-8''jenelia.jpeg", "encoded_key"=>"eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdDRG9JYTJWNVNTSWROVXAxWTFWSFdFTjRaVlZ6YmtwTFkxUmhkMVZ6TlhOdUJqb0dSVlE2RUdScGMzQnZjMmwwYVc5dVNTSkRhVzVzYVc1bE95Qm1hV3hsYm1GdFpUMGlhbVZ1Wld4cFlTNXFjR1ZuSWpzZ1ptbHNaVzVoYldVcVBWVlVSaTA0SnlkcVpXNWxiR2xoTG1wd1pXY0dPd1pVT2hGamIyNTBaVzUwWDNSNWNHVkpJZzlwYldGblpTOXFjR1ZuQmpzR1ZBPT0iLCJleHAiOiIyMDE5LTAzLTExVDEyOjMxOjIyLjkwN1oiLCJwdXIiOiJibG9iX2tleSJ9fQ==--792b1a2383f91caa5d10c5b48b0068c41e81cc10", "filename"=>"jenelia"}
+Completed 200 OK in 2ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/notes" for 127.0.0.1 at 2019-03-11 17:56:25 +0530
+Processing by NotesController#index as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  Rendering notes/index.html.erb within layouts/application
+  [1m[36mNote Load (0.3ms)[0m  [1m[34mSELECT "notes".* FROM "notes" WHERE "notes"."user_id" = ? AND "notes"."status" = ? ORDER BY created_at DESC[0m  [["user_id", 1], ["status", 0]]
+  ↳ app/views/notes/_side.html.erb:14
+  [1m[36mActsAsTaggableOn::Tagging Load (0.2ms)[0m  [1m[34mSELECT "taggings".* FROM "taggings" WHERE "taggings"."taggable_type" = ? AND "taggings"."taggable_id" = ?[0m  [["taggable_type", "Note"], ["taggable_id", 1]]
+  ↳ app/views/notes/_side.html.erb:14
+  [1m[36mActsAsTaggableOn::Tag Load (0.4ms)[0m  [1m[34mSELECT "tags".* FROM "tags" INNER JOIN "taggings" ON "tags"."id" = "taggings"."tag_id" WHERE "taggings"."taggable_id" = ? AND "taggings"."taggable_type" = ? AND (taggings.context = 'tags' AND taggings.tagger_id IS NULL)[0m  [["taggable_id", 1], ["taggable_type", "Note"]]
+  ↳ app/views/notes/_side.html.erb:37
+  Rendered notes/_side.html.erb (53.1ms)
+  Rendered notes/index.html.erb within layouts/application (57.2ms)
+  Rendered devise/shared/_navigation.html.erb (1.4ms)
+Completed 200 OK in 214ms (Views: 193.1ms | ActiveRecord: 3.3ms)
+
+
+Started DELETE "/users/sign_out" for 127.0.0.1 at 2019-03-11 17:56:33 +0530
+Processing by Devise::SessionsController#destroy as HTML
+  Parameters: {"authenticity_token"=>"LdfIixWa4eB/YSJtwrRJfw68tpDS+FrQ2AkmsrvF+JcrXuZcBu+5l9FmvN+vAV8Wn/lDZQdUIf5K27KV36f2Ug=="}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  [1m[35m (0.1ms)[0m  [1m[36mcommit transaction[0m
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+Redirected to http://localhost:3000/
+Completed 302 Found in 11ms (ActiveRecord: 0.5ms)
+
+
+Started GET "/" for 127.0.0.1 at 2019-03-11 17:56:33 +0530
+Processing by NotesController#index as HTML
+Completed 401 Unauthorized in 1ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2019-03-11 17:56:33 +0530
+Processing by Devise::SessionsController#new as HTML
+  Rendering devise/sessions/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (1.4ms)
+  Rendered devise/sessions/new.html.erb within layouts/application (8.2ms)
+Completed 200 OK in 155ms (Views: 153.3ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2019-03-11 17:56:34 +0530
+Processing by Devise::SessionsController#new as HTML
+  Rendering devise/sessions/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (1.2ms)
+  Rendered devise/sessions/new.html.erb within layouts/application (7.6ms)
+Completed 200 OK in 178ms (Views: 176.7ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2019-03-11 17:56:35 +0530
+Processing by Devise::SessionsController#new as HTML
+  Rendering devise/sessions/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (1.3ms)
+  Rendered devise/sessions/new.html.erb within layouts/application (8.0ms)
+Completed 200 OK in 133ms (Views: 131.7ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users/sign_in" for 127.0.0.1 at 2019-03-11 17:56:41 +0530
+Processing by Devise::SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"PozJ4JJCeCsqcUsXaOm9qzRG+V8GEfJwJieOIsmi9D/3FXQEgLPBHiXS/0DUT+eezXiwAL838MdIx95aq+fB4w==", "user"=>{"email"=>"dg@narola.email", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."email" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["email", "dg@narola.email"], ["LIMIT", 1]]
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+Redirected to http://localhost:3000/
+Completed 302 Found in 173ms (ActiveRecord: 0.3ms)
+
+
+Started GET "/" for 127.0.0.1 at 2019-03-11 17:56:41 +0530
+Processing by NotesController#index as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  Rendering notes/index.html.erb within layouts/application
+  [1m[36mNote Load (0.4ms)[0m  [1m[34mSELECT "notes".* FROM "notes" WHERE "notes"."user_id" = ? AND "notes"."status" = ? ORDER BY created_at DESC[0m  [["user_id", 1], ["status", 0]]
+  ↳ app/views/notes/_side.html.erb:14
+  [1m[36mActsAsTaggableOn::Tagging Load (0.2ms)[0m  [1m[34mSELECT "taggings".* FROM "taggings" WHERE "taggings"."taggable_type" = ? AND "taggings"."taggable_id" = ?[0m  [["taggable_type", "Note"], ["taggable_id", 1]]
+  ↳ app/views/notes/_side.html.erb:14
+  [1m[36mActsAsTaggableOn::Tag Load (0.2ms)[0m  [1m[34mSELECT "tags".* FROM "tags" INNER JOIN "taggings" ON "tags"."id" = "taggings"."tag_id" WHERE "taggings"."taggable_id" = ? AND "taggings"."taggable_type" = ? AND (taggings.context = 'tags' AND taggings.tagger_id IS NULL)[0m  [["taggable_id", 1], ["taggable_type", "Note"]]
+  ↳ app/views/notes/_side.html.erb:37
+  Rendered notes/_side.html.erb (8.6ms)
+  Rendered notes/index.html.erb within layouts/application (12.8ms)
+  Rendered devise/shared/_navigation.html.erb (1.1ms)
+Completed 200 OK in 208ms (Views: 194.5ms | ActiveRecord: 1.2ms)
+
+
+Started GET "/" for 127.0.0.1 at 2019-03-11 17:56:43 +0530
+Processing by NotesController#index as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  Rendering notes/index.html.erb within layouts/application
+  [1m[36mNote Load (0.3ms)[0m  [1m[34mSELECT "notes".* FROM "notes" WHERE "notes"."user_id" = ? AND "notes"."status" = ? ORDER BY created_at DESC[0m  [["user_id", 1], ["status", 0]]
+  ↳ app/views/notes/_side.html.erb:14
+  [1m[36mActsAsTaggableOn::Tagging Load (0.3ms)[0m  [1m[34mSELECT "taggings".* FROM "taggings" WHERE "taggings"."taggable_type" = ? AND "taggings"."taggable_id" = ?[0m  [["taggable_type", "Note"], ["taggable_id", 1]]
+  ↳ app/views/notes/_side.html.erb:14
+  [1m[36mActsAsTaggableOn::Tag Load (0.6ms)[0m  [1m[34mSELECT "tags".* FROM "tags" INNER JOIN "taggings" ON "tags"."id" = "taggings"."tag_id" WHERE "taggings"."taggable_id" = ? AND "taggings"."taggable_type" = ? AND (taggings.context = 'tags' AND taggings.tagger_id IS NULL)[0m  [["taggable_id", 1], ["taggable_type", "Note"]]
+  ↳ app/views/notes/_side.html.erb:37
+  Rendered notes/_side.html.erb (11.4ms)
+  Rendered notes/index.html.erb within layouts/application (15.6ms)
+  Rendered devise/shared/_navigation.html.erb (2.0ms)
+Completed 200 OK in 185ms (Views: 176.4ms | ActiveRecord: 1.5ms)
+
+
+Started GET "/notes/1/sharenotes/new" for 127.0.0.1 at 2019-03-11 17:56:45 +0530
+Processing by SharenotesController#new as JS
+  Parameters: {"note_id"=>"1"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  [1m[36mNote Load (0.2ms)[0m  [1m[34mSELECT  "notes".* FROM "notes" WHERE "notes"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/sharenotes_controller.rb:38
+  Rendering sharenotes/new.js.erb
+  Rendered sharenotes/_new.html.erb (4.5ms)
+  Rendered sharenotes/new.js.erb (54.9ms)
+Completed 200 OK in 187ms (Views: 129.0ms | ActiveRecord: 1.0ms)
+
+
+Started POST "/notes/1/sharenotes" for 127.0.0.1 at 2019-03-11 17:56:49 +0530
+Processing by SharenotesController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"I494TSsG9h5kGdispiBYb6rt9mhaXQecV0CI4yONlYZeBVcJFyxWGYxacqAoiGRGuuTYss8mkx2MGStwawFiMg==", "sharenote"=>{"email"=>"ssa@narola.email", "user_id"=>"1", "edit"=>"0", "view"=>"1"}, "commit"=>"Send", "note_id"=>"1"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  [1m[36mNote Load (0.2ms)[0m  [1m[34mSELECT  "notes".* FROM "notes" WHERE "notes"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/sharenotes_controller.rb:42
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/sharenotes_controller.rb:45
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/sharenotes_controller.rb:45
+  [1m[36mSharenote Create (0.8ms)[0m  [1m[32mINSERT INTO "sharenotes" ("email", "user_id", "note_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["email", "ssa@narola.email"], ["user_id", 1], ["note_id", 1], ["created_at", "2019-03-11 12:26:49.409579"], ["updated_at", "2019-03-11 12:26:49.409579"]]
+  ↳ app/controllers/sharenotes_controller.rb:45
+  [1m[35m (2.1ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/sharenotes_controller.rb:45
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ?[0m  [["email", "ssa@narola.email"]]
+  ↳ app/controllers/sharenotes_controller.rb:47
+  Rendering note_mailer/reg_email.html.erb within layouts/mailer
+  Rendered note_mailer/reg_email.html.erb within layouts/mailer (1.1ms)
+  Rendering note_mailer/reg_email.text.erb within layouts/mailer
+  Rendered note_mailer/reg_email.text.erb within layouts/mailer (0.5ms)
+NoteMailer#reg_email: processed outbound mail in 112.8ms
+Sent mail to ssa@narola.email (56.6ms)
+Date: Mon, 11 Mar 2019 17:56:49 +0530
+From: dg@narola.email
+To: ssa@narola.email
+Message-ID: <5c865409d0bd5_47323ff8bb1e2e9c32069@C100-74s-iMac.local.mail>
+Subject: Note Shared
+Mime-Version: 1.0
+Content-Type: multipart/alternative;
+ boundary="--==_mimepart_5c865409ce507_47323ff8bb1e2e9c31924";
+ charset=UTF-8
+Content-Transfer-Encoding: 7bit
+
+
+----==_mimepart_5c865409ce507_47323ff8bb1e2e9c31924
+Content-Type: text/plain;
+ charset=UTF-8
+Content-Transfer-Encoding: 7bit
+
+Hi   ssa@narola.email
+A new note shared by dg@narola.email
+To view the note please login here   http://localhost:3000/users/sign_up
+
+
+----==_mimepart_5c865409ce507_47323ff8bb1e2e9c31924
+Content-Type: text/html;
+ charset=UTF-8
+Content-Transfer-Encoding: 7bit
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <style>
+      /* Email styles need to be inline */
+    </style>
+  </head>
+
+  <body>
+    <!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>Hi   ssa@narola.email</h1>
+    <p>
+      A new note shared by dg@narola.email
+      To view the note please login here      <a href="http://localhost:3000/users/sign_up">Login</a>
+    </p>
+  </body>
+</html>
+
+  </body>
+</html>
+
+----==_mimepart_5c865409ce507_47323ff8bb1e2e9c31924--
+
+Redirected to http://localhost:3000/notes
+Completed 302 Found in 517ms (ActiveRecord: 4.3ms)
+
+
+Started GET "/notes" for 127.0.0.1 at 2019-03-11 17:56:49 +0530
+Processing by NotesController#index as HTML
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  Rendering notes/index.html.erb within layouts/application
+  [1m[36mNote Load (0.3ms)[0m  [1m[34mSELECT "notes".* FROM "notes" WHERE "notes"."user_id" = ? AND "notes"."status" = ? ORDER BY created_at DESC[0m  [["user_id", 1], ["status", 0]]
+  ↳ app/views/notes/_side.html.erb:14
+  [1m[36mActsAsTaggableOn::Tagging Load (0.3ms)[0m  [1m[34mSELECT "taggings".* FROM "taggings" WHERE "taggings"."taggable_type" = ? AND "taggings"."taggable_id" = ?[0m  [["taggable_type", "Note"], ["taggable_id", 1]]
+  ↳ app/views/notes/_side.html.erb:14
+  [1m[36mActsAsTaggableOn::Tag Load (0.7ms)[0m  [1m[34mSELECT "tags".* FROM "tags" INNER JOIN "taggings" ON "tags"."id" = "taggings"."tag_id" WHERE "taggings"."taggable_id" = ? AND "taggings"."taggable_type" = ? AND (taggings.context = 'tags' AND taggings.tagger_id IS NULL)[0m  [["taggable_id", 1], ["taggable_type", "Note"]]
+  ↳ app/views/notes/_side.html.erb:37
+  Rendered notes/_side.html.erb (16.6ms)
+  Rendered notes/index.html.erb within layouts/application (26.4ms)
+  Rendered devise/shared/_navigation.html.erb (1.8ms)
+Completed 200 OK in 434ms (Views: 403.9ms | ActiveRecord: 1.9ms)
+
+
+Started DELETE "/users/sign_out" for 127.0.0.1 at 2019-03-11 17:56:57 +0530
+Processing by Devise::SessionsController#destroy as HTML
+  Parameters: {"authenticity_token"=>"JKrW6vmOGKzFlOeIm4whCHaa9+D595hirJ/elSmgAXl+wEosNVgBia21+R/nAUlRHZNu5NokxEi8dKMdGPli8g=="}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  [1m[35m (0.1ms)[0m  [1m[36mcommit transaction[0m
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+Redirected to http://localhost:3000/
+Completed 302 Found in 9ms (ActiveRecord: 0.7ms)
+
+
+Started GET "/" for 127.0.0.1 at 2019-03-11 17:56:57 +0530
+Processing by NotesController#index as HTML
+Completed 401 Unauthorized in 1ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2019-03-11 17:56:57 +0530
+Processing by Devise::SessionsController#new as HTML
+  Rendering devise/sessions/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (2.0ms)
+  Rendered devise/sessions/new.html.erb within layouts/application (8.6ms)
+Completed 200 OK in 231ms (Views: 228.7ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users/sign_up" for 127.0.0.1 at 2019-03-11 17:57:00 +0530
+Processing by Devise::RegistrationsController#new as HTML
+  Rendering devise/registrations/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (1.7ms)
+  Rendered devise/registrations/new.html.erb within layouts/application (11.8ms)
+Completed 200 OK in 217ms (Views: 215.5ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users" for 127.0.0.1 at 2019-03-11 17:57:17 +0530
+Processing by Devise::RegistrationsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"rHty+i/V5p7N1igMMfGlm5zjYT+HS7fQp2XUTYioOLA9w8x77d6jtpw8P+h45866rxTpKKHMrQ2EJP8fkbSwfg==", "user"=>{"email"=>"ssa@narola.email", "username"=>"sana", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "image"=>#<ActionDispatch::Http::UploadedFile:0x00007ff17e15e588 @tempfile=#<Tempfile:/var/folders/p5/6pt6gjv91gz96133gwycgkkh0000gn/T/RackMultipart20190311-18226-rvlh3s.jpeg>, @original_filename="jenelia.jpeg", @content_type="image/jpeg", @headers="Content-Disposition: form-data; name=\"user[image]\"; filename=\"jenelia.jpeg\"\r\nContent-Type: image/jpeg\r\n">}, "commit"=>"Sign up"}
+[36m  Disk Storage (1.7ms) [0m[32mUploaded file to key: 8cocAtUgLJLzcCi9aGvGU1mD (checksum: zZMxEVIqMenX+4eF2iRE6g==)[0m
+  [1m[35m (0.2ms)[0m  [1m[36mbegin transaction[0m
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  [1m[36mActiveStorage::Blob Create (0.7ms)[0m  [1m[32mINSERT INTO "active_storage_blobs" ("key", "filename", "content_type", "metadata", "byte_size", "checksum", "created_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["key", "8cocAtUgLJLzcCi9aGvGU1mD"], ["filename", "jenelia.jpeg"], ["content_type", "image/jpeg"], ["metadata", "{\"identified\":true}"], ["byte_size", 10380], ["checksum", "zZMxEVIqMenX+4eF2iRE6g=="], ["created_at", "2019-03-11 12:27:17.451805"]]
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  [1m[35m (1.5ms)[0m  [1m[36mcommit transaction[0m
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  [1m[35m (0.1ms)[0m  [1m[36mcommit transaction[0m
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  [1m[35m (0.2ms)[0m  [1m[36mbegin transaction[0m
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  [1m[36mUser Exists (0.2ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "ssa@narola.email"], ["LIMIT", 1]]
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  [1m[36mUser Create (0.7ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "username", "confirmation_token", "confirmation_sent_at", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["email", "ssa@narola.email"], ["encrypted_password", "$2a$11$pKB6O0JV2bUL5UZP1j1JSecToduwTaZSVuJTNU/zQoACgh933wyaa"], ["username", "sana"], ["confirmation_token", "aL-fVr_Nz8jJyhssnD_k"], ["confirmation_sent_at", "2019-03-11 12:27:17.464565"], ["created_at", "2019-03-11 12:27:17.464197"], ["updated_at", "2019-03-11 12:27:17.464197"]]
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  [1m[36mActiveStorage::Attachment Create (0.3ms)[0m  [1m[32mINSERT INTO "active_storage_attachments" ("name", "record_type", "record_id", "blob_id", "created_at") VALUES (?, ?, ?, ?, ?)[0m  [["name", "image"], ["record_type", "User"], ["record_id", 2], ["blob_id", 3], ["created_at", "2019-03-11 12:27:17.468279"]]
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  [1m[36mUser Update (0.1ms)[0m  [1m[33mUPDATE "users" SET "updated_at" = ? WHERE "users"."id" = ?[0m  [["updated_at", "2019-03-11 12:27:17.470018"], ["id", 2]]
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  [1m[35m (1.5ms)[0m  [1m[36mcommit transaction[0m
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+Completed 500 Internal Server Error in 201ms (ActiveRecord: 5.6ms)
+
+
+  
+NoMethodError (undefined method `assign_customer_id' for #<User:0x00007ff17e14de40>
+Did you mean?  assign_attributes):
+  
+activemodel (5.2.2) lib/active_model/attribute_methods.rb:430:in `method_missing'
+activesupport (5.2.2) lib/active_support/callbacks.rb:426:in `block in make_lambda'
+activesupport (5.2.2) lib/active_support/callbacks.rb:261:in `block in conditional'
+activesupport (5.2.2) lib/active_support/callbacks.rb:517:in `block in invoke_after'
+activesupport (5.2.2) lib/active_support/callbacks.rb:517:in `each'
+activesupport (5.2.2) lib/active_support/callbacks.rb:517:in `invoke_after'
+activesupport (5.2.2) lib/active_support/callbacks.rb:133:in `run_callbacks'
+activesupport (5.2.2) lib/active_support/callbacks.rb:816:in `_run_commit_callbacks'
+activerecord (5.2.2) lib/active_record/transactions.rb:346:in `committed!'
+activerecord (5.2.2) lib/active_record/connection_adapters/abstract/transaction.rb:128:in `commit_records'
+activerecord (5.2.2) lib/active_record/connection_adapters/abstract/transaction.rb:223:in `block in commit_transaction'
+/Users/c100-74/.rvm/rubies/ruby-2.5.1/lib/ruby/2.5.0/monitor.rb:226:in `mon_synchronize'
+activerecord (5.2.2) lib/active_record/connection_adapters/abstract/transaction.rb:213:in `commit_transaction'
+activerecord (5.2.2) lib/active_record/connection_adapters/abstract/transaction.rb:252:in `block in within_new_transaction'
+/Users/c100-74/.rvm/rubies/ruby-2.5.1/lib/ruby/2.5.0/monitor.rb:226:in `mon_synchronize'
+activerecord (5.2.2) lib/active_record/connection_adapters/abstract/transaction.rb:236:in `within_new_transaction'
+activerecord (5.2.2) lib/active_record/connection_adapters/abstract/database_statements.rb:259:in `transaction'
+activerecord (5.2.2) lib/active_record/transactions.rb:212:in `transaction'
+activerecord (5.2.2) lib/active_record/transactions.rb:385:in `with_transaction_returning_status'
+activerecord (5.2.2) lib/active_record/transactions.rb:310:in `block in save'
+activerecord (5.2.2) lib/active_record/transactions.rb:325:in `rollback_active_record_state!'
+activerecord (5.2.2) lib/active_record/transactions.rb:309:in `save'
+activerecord (5.2.2) lib/active_record/suppressor.rb:44:in `save'
+devise (4.5.0) app/controllers/devise/registrations_controller.rb:19:in `create'
+actionpack (5.2.2) lib/action_controller/metal/basic_implicit_render.rb:6:in `send_action'
+actionpack (5.2.2) lib/abstract_controller/base.rb:194:in `process_action'
+actionpack (5.2.2) lib/action_controller/metal/rendering.rb:30:in `process_action'
+actionpack (5.2.2) lib/abstract_controller/callbacks.rb:42:in `block in process_action'
+activesupport (5.2.2) lib/active_support/callbacks.rb:132:in `run_callbacks'
+actionpack (5.2.2) lib/abstract_controller/callbacks.rb:41:in `process_action'
+actionpack (5.2.2) lib/action_controller/metal/rescue.rb:22:in `process_action'
+actionpack (5.2.2) lib/action_controller/metal/instrumentation.rb:34:in `block in process_action'
+activesupport (5.2.2) lib/active_support/notifications.rb:168:in `block in instrument'
+activesupport (5.2.2) lib/active_support/notifications/instrumenter.rb:23:in `instrument'
+activesupport (5.2.2) lib/active_support/notifications.rb:168:in `instrument'
+actionpack (5.2.2) lib/action_controller/metal/instrumentation.rb:32:in `process_action'
+actionpack (5.2.2) lib/action_controller/metal/params_wrapper.rb:256:in `process_action'
+activerecord (5.2.2) lib/active_record/railties/controller_runtime.rb:24:in `process_action'
+actionpack (5.2.2) lib/abstract_controller/base.rb:134:in `process'
+actionview (5.2.2) lib/action_view/rendering.rb:32:in `process'
+actionpack (5.2.2) lib/action_controller/metal.rb:191:in `dispatch'
+actionpack (5.2.2) lib/action_controller/metal.rb:252:in `dispatch'
+actionpack (5.2.2) lib/action_dispatch/routing/route_set.rb:52:in `dispatch'
+actionpack (5.2.2) lib/action_dispatch/routing/route_set.rb:34:in `serve'
+actionpack (5.2.2) lib/action_dispatch/routing/mapper.rb:18:in `block in <class:Constraints>'
+actionpack (5.2.2) lib/action_dispatch/routing/mapper.rb:48:in `serve'
+actionpack (5.2.2) lib/action_dispatch/journey/router.rb:52:in `block in serve'
+actionpack (5.2.2) lib/action_dispatch/journey/router.rb:35:in `each'
+actionpack (5.2.2) lib/action_dispatch/journey/router.rb:35:in `serve'
+actionpack (5.2.2) lib/action_dispatch/routing/route_set.rb:840:in `call'
+bullet (5.9.0) lib/bullet/rack.rb:15:in `call'
+warden (1.2.8) lib/warden/manager.rb:36:in `block in call'
+warden (1.2.8) lib/warden/manager.rb:34:in `catch'
+warden (1.2.8) lib/warden/manager.rb:34:in `call'
+rack (2.0.6) lib/rack/tempfile_reaper.rb:15:in `call'
+rack (2.0.6) lib/rack/etag.rb:25:in `call'
+rack (2.0.6) lib/rack/conditional_get.rb:38:in `call'
+rack (2.0.6) lib/rack/head.rb:12:in `call'
+actionpack (5.2.2) lib/action_dispatch/http/content_security_policy.rb:18:in `call'
+rack (2.0.6) lib/rack/session/abstract/id.rb:232:in `context'
+rack (2.0.6) lib/rack/session/abstract/id.rb:226:in `call'
+actionpack (5.2.2) lib/action_dispatch/middleware/cookies.rb:670:in `call'
+activerecord (5.2.2) lib/active_record/migration.rb:559:in `call'
+actionpack (5.2.2) lib/action_dispatch/middleware/callbacks.rb:28:in `block in call'
+activesupport (5.2.2) lib/active_support/callbacks.rb:98:in `run_callbacks'
+actionpack (5.2.2) lib/action_dispatch/middleware/callbacks.rb:26:in `call'
+actionpack (5.2.2) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (5.2.2) lib/action_dispatch/middleware/debug_exceptions.rb:61:in `call'
+web-console (3.7.0) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.7.0) lib/web_console/middleware.rb:30:in `block in call'
+web-console (3.7.0) lib/web_console/middleware.rb:20:in `catch'
+web-console (3.7.0) lib/web_console/middleware.rb:20:in `call'
+actionpack (5.2.2) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (5.2.2) lib/rails/rack/logger.rb:38:in `call_app'
+railties (5.2.2) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (5.2.2) lib/active_support/tagged_logging.rb:71:in `block in tagged'
+activesupport (5.2.2) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (5.2.2) lib/active_support/tagged_logging.rb:71:in `tagged'
+railties (5.2.2) lib/rails/rack/logger.rb:26:in `call'
+sprockets-rails (3.2.1) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (5.2.2) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (5.2.2) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.0.6) lib/rack/method_override.rb:22:in `call'
+rack (2.0.6) lib/rack/runtime.rb:22:in `call'
+activesupport (5.2.2) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (5.2.2) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (5.2.2) lib/action_dispatch/middleware/static.rb:127:in `call'
+rack (2.0.6) lib/rack/sendfile.rb:111:in `call'
+railties (5.2.2) lib/rails/engine.rb:524:in `call'
+puma (3.12.0) lib/puma/configuration.rb:225:in `call'
+puma (3.12.0) lib/puma/server.rb:658:in `handle_request'
+puma (3.12.0) lib/puma/server.rb:472:in `process_client'
+puma (3.12.0) lib/puma/server.rb:332:in `block in run'
+puma (3.12.0) lib/puma/thread_pool.rb:133:in `block in spawn_thread'
+Started POST "/users" for 127.0.0.1 at 2019-03-11 17:57:46 +0530
+Processing by Devise::RegistrationsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"rHty+i/V5p7N1igMMfGlm5zjYT+HS7fQp2XUTYioOLA9w8x77d6jtpw8P+h45866rxTpKKHMrQ2EJP8fkbSwfg==", "user"=>{"email"=>"ssa@narola.email", "username"=>"sana", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "image"=>#<ActionDispatch::Http::UploadedFile:0x00007ff17ae83870 @tempfile=#<Tempfile:/var/folders/p5/6pt6gjv91gz96133gwycgkkh0000gn/T/RackMultipart20190311-18226-1yo06z1.jpeg>, @original_filename="jenelia.jpeg", @content_type="image/jpeg", @headers="Content-Disposition: form-data; name=\"user[image]\"; filename=\"jenelia.jpeg\"\r\nContent-Type: image/jpeg\r\n">}, "commit"=>"Sign up"}
+[36m  Disk Storage (1.6ms) [0m[32mUploaded file to key: dezJDbbxdWw8tAfKqxtj5Qkc (checksum: zZMxEVIqMenX+4eF2iRE6g==)[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  [1m[36mActiveStorage::Blob Create (0.5ms)[0m  [1m[32mINSERT INTO "active_storage_blobs" ("key", "filename", "content_type", "metadata", "byte_size", "checksum", "created_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["key", "dezJDbbxdWw8tAfKqxtj5Qkc"], ["filename", "jenelia.jpeg"], ["content_type", "image/jpeg"], ["metadata", "{\"identified\":true}"], ["byte_size", 10380], ["checksum", "zZMxEVIqMenX+4eF2iRE6g=="], ["created_at", "2019-03-11 12:27:47.297120"]]
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  [1m[35m (1.2ms)[0m  [1m[36mcommit transaction[0m
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  [1m[35m (0.1ms)[0m  [1m[36mcommit transaction[0m
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  [1m[36mUser Exists (0.2ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "ssa@narola.email"], ["LIMIT", 1]]
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  [1m[35m (0.1ms)[0m  [1m[31mrollback transaction[0m
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  Rendering devise/registrations/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (1.1ms)
+  Rendered devise/registrations/new.html.erb within layouts/application (8.9ms)
+Completed 200 OK in 441ms (Views: 201.8ms | ActiveRecord: 4.4ms)
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2019-03-11 17:57:50 +0530
+Processing by Devise::SessionsController#new as HTML
+  Rendering devise/sessions/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (1.7ms)
+  Rendered devise/sessions/new.html.erb within layouts/application (7.1ms)
+Completed 200 OK in 151ms (Views: 148.9ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users/sign_in" for 127.0.0.1 at 2019-03-11 17:57:56 +0530
+Processing by Devise::SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"bg3xbYZ6AJ8JBRDNpbWoAgLLmKOIHGhyL9OgVaZUS/EZfhxPTolNv5PHm1ZzOIQDm4t3U4LFaimDjyQ953P0wg==", "user"=>{"email"=>"ssa@narola.email", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."email" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["email", "ssa@narola.email"], ["LIMIT", 1]]
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  [1m[35m (0.1ms)[0m  [1m[36mcommit transaction[0m
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+Completed 401 Unauthorized in 148ms (ActiveRecord: 0.8ms)
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2019-03-11 17:57:57 +0530
+Processing by Devise::SessionsController#new as HTML
+  Rendering devise/sessions/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (1.1ms)
+  Rendered devise/sessions/new.html.erb within layouts/application (7.5ms)
+Completed 200 OK in 157ms (Views: 155.4ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users/confirmation/new" for 127.0.0.1 at 2019-03-11 17:58:00 +0530
+Processing by ConfirmationsController#new as HTML
+  Rendering devise/confirmations/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (1.2ms)
+  Rendered devise/confirmations/new.html.erb within layouts/application (6.4ms)
+Completed 200 OK in 186ms (Views: 172.5ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users/confirmation" for 127.0.0.1 at 2019-03-11 17:58:04 +0530
+Processing by ConfirmationsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"vXytpQurf0962Q2Fpnk6afkj2fpdODc41Q3TZmC/vWqCdSqeIYEsqnurSLhM7i+VAA8ASaNkAyWXaQH5NQCvrA==", "user"=>{"email"=>"ssa@narola.email"}, "commit"=>"Resend confirmation instructions"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."unconfirmed_email" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["unconfirmed_email", "ssa@narola.email"], ["LIMIT", 1]]
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."email" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["email", "ssa@narola.email"], ["LIMIT", 1]]
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  [1m[35m (0.1ms)[0m  [1m[36mcommit transaction[0m
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  Rendering devise/mailer/confirmation_instructions.html.erb
+  Rendered devise/mailer/confirmation_instructions.html.erb (0.8ms)
+Devise::Mailer#confirmation_instructions: processed outbound mail in 76.6ms
+Sent mail to ssa@narola.email (19.6ms)
+Date: Mon, 11 Mar 2019 17:58:04 +0530
+From: narolarubydeveloper1@gmail.com
+To: ssa@narola.email
+Message-ID: <5c865454e55e5_47323ff8bb1e2e9c3218c@C100-74s-iMac.local.mail>
+Subject: Confirmation instructions
+Mime-Version: 1.0
+Content-Type: text/html;
+ charset=UTF-8
+Content-Transfer-Encoding: 7bit
+
+<p>Welcome ssa@narola.email!</p>
+
+<p>You can confirm your account email through the link below:</p>
+
+<p><a href="http://localhost:3000/users/confirmation?confirmation_token=aL-fVr_Nz8jJyhssnD_k">Confirm my account</a></p>
+
+Redirected to http://localhost:3000/users/sign_in
+Completed 302 Found in 198ms (ActiveRecord: 1.0ms)
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2019-03-11 17:58:05 +0530
+Processing by Devise::SessionsController#new as HTML
+  Rendering devise/sessions/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (3.0ms)
+  Rendered devise/sessions/new.html.erb within layouts/application (54.8ms)
+Completed 200 OK in 299ms (Views: 296.1ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users/confirmation?confirmation_token=aL-fVr_Nz8jJyhssnD_k" for 127.0.0.1 at 2019-03-11 17:58:07 +0530
+Processing by ConfirmationsController#show as HTML
+  Parameters: {"confirmation_token"=>"aL-fVr_Nz8jJyhssnD_k"}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."confirmation_token" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["confirmation_token", "aL-fVr_Nz8jJyhssnD_k"], ["LIMIT", 1]]
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  [1m[36mUser Update (0.8ms)[0m  [1m[33mUPDATE "users" SET "confirmed_at" = ?, "updated_at" = ? WHERE "users"."id" = ?[0m  [["confirmed_at", "2019-03-11 12:28:07.198768"], ["updated_at", "2019-03-11 12:28:07.200364"], ["id", 2]]
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  [1m[35m (1.3ms)[0m  [1m[36mcommit transaction[0m
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+Redirected to http://localhost:3000/notes
+Completed 302 Found in 17ms (ActiveRecord: 2.8ms)
+
+
+Started GET "/notes" for 127.0.0.1 at 2019-03-11 17:58:07 +0530
+Processing by NotesController#index as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  Rendering notes/index.html.erb within layouts/application
+  [1m[36mNote Load (0.5ms)[0m  [1m[34mSELECT "notes".* FROM "notes" WHERE "notes"."user_id" = ? AND "notes"."status" = ? ORDER BY created_at DESC[0m  [["user_id", 2], ["status", 0]]
+  ↳ app/views/notes/_side.html.erb:14
+  Rendered notes/_side.html.erb (4.8ms)
+  Rendered notes/index.html.erb within layouts/application (8.8ms)
+  Rendered devise/shared/_navigation.html.erb (1.3ms)
+Completed 200 OK in 204ms (Views: 182.9ms | ActiveRecord: 1.7ms)
+
+
+Started GET "/notes" for 127.0.0.1 at 2019-03-11 17:58:09 +0530
+Processing by NotesController#index as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  Rendering notes/index.html.erb within layouts/application
+  [1m[36mNote Load (0.2ms)[0m  [1m[34mSELECT "notes".* FROM "notes" WHERE "notes"."user_id" = ? AND "notes"."status" = ? ORDER BY created_at DESC[0m  [["user_id", 2], ["status", 0]]
+  ↳ app/views/notes/_side.html.erb:14
+  Rendered notes/_side.html.erb (3.2ms)
+  Rendered notes/index.html.erb within layouts/application (7.3ms)
+  Rendered devise/shared/_navigation.html.erb (1.1ms)
+Completed 200 OK in 174ms (Views: 167.6ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/notes/sharenotes/shownote" for 127.0.0.1 at 2019-03-11 17:58:10 +0530
+Processing by SharenotesController#shownote as JS
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  Rendering sharenotes/shownote.js.erb
+  [1m[35mSQL (0.3ms)[0m  [1m[34mSELECT "sharenotes"."id" AS t0_r0, "sharenotes"."email" AS t0_r1, "sharenotes"."user_id" AS t0_r2, "sharenotes"."note_id" AS t0_r3, "sharenotes"."created_at" AS t0_r4, "sharenotes"."updated_at" AS t0_r5, "sharenotes"."edit" AS t0_r6, "sharenotes"."view" AS t0_r7, "notes"."id" AS t1_r0, "notes"."title" AS t1_r1, "notes"."description" AS t1_r2, "notes"."status" AS t1_r3, "notes"."user_id" AS t1_r4, "notes"."created_at" AS t1_r5, "notes"."updated_at" AS t1_r6, "notes"."important" AS t1_r7, "notes"."price" AS t1_r8, "notes"."customer_id" AS t1_r9, "users"."id" AS t2_r0, "users"."email" AS t2_r1, "users"."encrypted_password" AS t2_r2, "users"."image" AS t2_r3, "users"."username" AS t2_r4, "users"."reset_password_token" AS t2_r5, "users"."reset_password_sent_at" AS t2_r6, "users"."remember_created_at" AS t2_r7, "users"."confirmation_token" AS t2_r8, "users"."confirmed_at" AS t2_r9, "users"."confirmation_sent_at" AS t2_r10, "users"."unconfirmed_email" AS t2_r11, "users"."created_at" AS t2_r12, "users"."updated_at" AS t2_r13, "users"."autosave" AS t2_r14 FROM "sharenotes" LEFT OUTER JOIN "notes" ON "notes"."id" = "sharenotes"."note_id" LEFT OUTER JOIN "users" ON "users"."id" = "sharenotes"."user_id" WHERE "sharenotes"."user_id" = ? AND "notes"."status" = ?[0m  [["user_id", 2], ["status", 0]]
+  ↳ app/views/sharenotes/_shownote.html.erb:19
+  Rendered sharenotes/_shownote.html.erb (6.9ms)
+  Rendered sharenotes/shownote.js.erb (51.7ms)
+Completed 200 OK in 170ms (Views: 117.7ms | ActiveRecord: 1.5ms)
+
+
+Started GET "/notes/sharenotes/index" for 127.0.0.1 at 2019-03-11 17:58:13 +0530
+Processing by SharenotesController#index as JS
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  Rendering sharenotes/index.js.erb
+  [1m[35mSQL (0.4ms)[0m  [1m[34mSELECT "sharenotes"."id" AS t0_r0, "sharenotes"."email" AS t0_r1, "sharenotes"."user_id" AS t0_r2, "sharenotes"."note_id" AS t0_r3, "sharenotes"."created_at" AS t0_r4, "sharenotes"."updated_at" AS t0_r5, "sharenotes"."edit" AS t0_r6, "sharenotes"."view" AS t0_r7, "notes"."id" AS t1_r0, "notes"."title" AS t1_r1, "notes"."description" AS t1_r2, "notes"."status" AS t1_r3, "notes"."user_id" AS t1_r4, "notes"."created_at" AS t1_r5, "notes"."updated_at" AS t1_r6, "notes"."important" AS t1_r7, "notes"."price" AS t1_r8, "notes"."customer_id" AS t1_r9, "users"."id" AS t2_r0, "users"."email" AS t2_r1, "users"."encrypted_password" AS t2_r2, "users"."image" AS t2_r3, "users"."username" AS t2_r4, "users"."reset_password_token" AS t2_r5, "users"."reset_password_sent_at" AS t2_r6, "users"."remember_created_at" AS t2_r7, "users"."confirmation_token" AS t2_r8, "users"."confirmed_at" AS t2_r9, "users"."confirmation_sent_at" AS t2_r10, "users"."unconfirmed_email" AS t2_r11, "users"."created_at" AS t2_r12, "users"."updated_at" AS t2_r13, "users"."autosave" AS t2_r14 FROM "sharenotes" LEFT OUTER JOIN "notes" ON "notes"."id" = "sharenotes"."note_id" LEFT OUTER JOIN "users" ON "users"."id" = "sharenotes"."user_id" WHERE "sharenotes"."email" = ? AND "notes"."status" = ?[0m  [["email", "ssa@narola.email"], ["status", 0]]
+  ↳ app/views/sharenotes/_index.html.erb:19
+  Rendered sharenotes/_index.html.erb (22.4ms)
+  Rendered sharenotes/index.js.erb (66.9ms)
+Completed 200 OK in 181ms (Views: 132.7ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/notes/sharenotes/index" for 127.0.0.1 at 2019-03-11 17:58:18 +0530
+Processing by SharenotesController#index as JS
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  Rendering sharenotes/index.js.erb
+  [1m[35mSQL (0.3ms)[0m  [1m[34mSELECT "sharenotes"."id" AS t0_r0, "sharenotes"."email" AS t0_r1, "sharenotes"."user_id" AS t0_r2, "sharenotes"."note_id" AS t0_r3, "sharenotes"."created_at" AS t0_r4, "sharenotes"."updated_at" AS t0_r5, "sharenotes"."edit" AS t0_r6, "sharenotes"."view" AS t0_r7, "notes"."id" AS t1_r0, "notes"."title" AS t1_r1, "notes"."description" AS t1_r2, "notes"."status" AS t1_r3, "notes"."user_id" AS t1_r4, "notes"."created_at" AS t1_r5, "notes"."updated_at" AS t1_r6, "notes"."important" AS t1_r7, "notes"."price" AS t1_r8, "notes"."customer_id" AS t1_r9, "users"."id" AS t2_r0, "users"."email" AS t2_r1, "users"."encrypted_password" AS t2_r2, "users"."image" AS t2_r3, "users"."username" AS t2_r4, "users"."reset_password_token" AS t2_r5, "users"."reset_password_sent_at" AS t2_r6, "users"."remember_created_at" AS t2_r7, "users"."confirmation_token" AS t2_r8, "users"."confirmed_at" AS t2_r9, "users"."confirmation_sent_at" AS t2_r10, "users"."unconfirmed_email" AS t2_r11, "users"."created_at" AS t2_r12, "users"."updated_at" AS t2_r13, "users"."autosave" AS t2_r14 FROM "sharenotes" LEFT OUTER JOIN "notes" ON "notes"."id" = "sharenotes"."note_id" LEFT OUTER JOIN "users" ON "users"."id" = "sharenotes"."user_id" WHERE "sharenotes"."email" = ? AND "notes"."status" = ?[0m  [["email", "ssa@narola.email"], ["status", 0]]
+  ↳ app/views/sharenotes/_index.html.erb:19
+  Rendered sharenotes/_index.html.erb (4.4ms)
+  Rendered sharenotes/index.js.erb (57.8ms)
+Completed 200 OK in 188ms (Views: 139.1ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/notes/1/sharenotes/editaccess" for 127.0.0.1 at 2019-03-11 17:58:19 +0530
+Processing by SharenotesController#editaccess as JS
+  Parameters: {"id"=>"1"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  [1m[36mNote Load (0.2ms)[0m  [1m[34mSELECT  "notes".* FROM "notes" WHERE "notes"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/sharenotes_controller.rb:60
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/sharenotes_controller.rb:64
+  Rendering note_mailer/edit_email.html.erb within layouts/mailer
+  Rendered note_mailer/edit_email.html.erb within layouts/mailer (0.6ms)
+  Rendering note_mailer/edit_email.text.erb within layouts/mailer
+  Rendered note_mailer/edit_email.text.erb within layouts/mailer (0.5ms)
+NoteMailer#edit_email: processed outbound mail in 52.4ms
+Sent mail to dg@narola.email (31.1ms)
+Date: Mon, 11 Mar 2019 17:58:19 +0530
+From: dg@narola.email
+To: dg@narola.email
+Message-ID: <5c8654638f03c_47323ff8bb1e2c5832367@C100-74s-iMac.local.mail>
+Subject: Edit Access Mail
+Mime-Version: 1.0
+Content-Type: multipart/alternative;
+ boundary="--==_mimepart_5c8654638e2e0_47323ff8bb1e2c58322b2";
+ charset=UTF-8
+Content-Transfer-Encoding: 7bit
+
+
+----==_mimepart_5c8654638e2e0_47323ff8bb1e2c58322b2
+Content-Type: text/plain;
+ charset=UTF-8
+Content-Transfer-Encoding: 7bit
+
+Hi   dg@narola.email
+Edit Acess requested by "ssa@narola.email"  for this note   "Orientation"
+
+Please click on this link for granting the permission http://localhost:3000/notes/1/sharenotes/updatepermission
+
+
+----==_mimepart_5c8654638e2e0_47323ff8bb1e2c58322b2
+Content-Type: text/html;
+ charset=UTF-8
+Content-Transfer-Encoding: 7bit
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <style>
+      /* Email styles need to be inline */
+    </style>
+  </head>
+
+  <body>
+    <!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>Hi   dg@narola.email</h1>
+    <p>
+      Edit Acess requested by  "ssa@narola.email" for this note  "Orientation"<br><br>
+      Please click on this link for granting the permission <a href="http://localhost:3000/notes/1/sharenotes/updatepermission">Click Here</a>
+    </p>
+  </body>
+</html>
+
+  </body>
+</html>
+
+----==_mimepart_5c8654638e2e0_47323ff8bb1e2c58322b2--
+
+No template found for SharenotesController#editaccess, rendering head :no_content
+Completed 204 No Content in 1357ms (ActiveRecord: 0.7ms)
+
+
+Started GET "/notes/1/sharenotes/updatepermission" for 127.0.0.1 at 2019-03-11 17:58:22 +0530
+Processing by SharenotesController#updatepermission as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  [1m[36mNote Load (0.2ms)[0m  [1m[34mSELECT  "notes".* FROM "notes" WHERE "notes"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/sharenotes_controller.rb:74
+  [1m[36mSharenote Load (0.8ms)[0m  [1m[34mSELECT "sharenotes".* FROM "sharenotes" WHERE "sharenotes"."id" = ?[0m  [["id", 1]]
+  ↳ app/controllers/sharenotes_controller.rb:77
+  [1m[35m (0.5ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/sharenotes_controller.rb:77
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/sharenotes_controller.rb:77
+  [1m[36mNote Load (0.1ms)[0m  [1m[34mSELECT  "notes".* FROM "notes" WHERE "notes"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/sharenotes_controller.rb:77
+  [1m[36mSharenote Update (1.5ms)[0m  [1m[33mUPDATE "sharenotes" SET "edit" = ?, "updated_at" = ? WHERE "sharenotes"."id" = ?[0m  [["edit", 1], ["updated_at", "2019-03-11 12:28:22.261615"], ["id", 1]]
+  ↳ app/controllers/sharenotes_controller.rb:77
+  [1m[35m (2.2ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/sharenotes_controller.rb:77
+Redirected to http://localhost:3000/notes
+Completed 302 Found in 40ms (ActiveRecord: 6.5ms)
+
+
+Started GET "/notes" for 127.0.0.1 at 2019-03-11 17:58:22 +0530
+Processing by NotesController#index as HTML
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  Rendering notes/index.html.erb within layouts/application
+  [1m[36mNote Load (0.3ms)[0m  [1m[34mSELECT "notes".* FROM "notes" WHERE "notes"."user_id" = ? AND "notes"."status" = ? ORDER BY created_at DESC[0m  [["user_id", 2], ["status", 0]]
+  ↳ app/views/notes/_side.html.erb:14
+  Rendered notes/_side.html.erb (3.9ms)
+  Rendered notes/index.html.erb within layouts/application (10.5ms)
+  Rendered devise/shared/_navigation.html.erb (1.3ms)
+Completed 200 OK in 229ms (Views: 213.4ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/notes/sharenotes/index" for 127.0.0.1 at 2019-03-11 17:58:24 +0530
+Processing by SharenotesController#index as JS
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  Rendering sharenotes/index.js.erb
+  [1m[35mSQL (0.7ms)[0m  [1m[34mSELECT "sharenotes"."id" AS t0_r0, "sharenotes"."email" AS t0_r1, "sharenotes"."user_id" AS t0_r2, "sharenotes"."note_id" AS t0_r3, "sharenotes"."created_at" AS t0_r4, "sharenotes"."updated_at" AS t0_r5, "sharenotes"."edit" AS t0_r6, "sharenotes"."view" AS t0_r7, "notes"."id" AS t1_r0, "notes"."title" AS t1_r1, "notes"."description" AS t1_r2, "notes"."status" AS t1_r3, "notes"."user_id" AS t1_r4, "notes"."created_at" AS t1_r5, "notes"."updated_at" AS t1_r6, "notes"."important" AS t1_r7, "notes"."price" AS t1_r8, "notes"."customer_id" AS t1_r9, "users"."id" AS t2_r0, "users"."email" AS t2_r1, "users"."encrypted_password" AS t2_r2, "users"."image" AS t2_r3, "users"."username" AS t2_r4, "users"."reset_password_token" AS t2_r5, "users"."reset_password_sent_at" AS t2_r6, "users"."remember_created_at" AS t2_r7, "users"."confirmation_token" AS t2_r8, "users"."confirmed_at" AS t2_r9, "users"."confirmation_sent_at" AS t2_r10, "users"."unconfirmed_email" AS t2_r11, "users"."created_at" AS t2_r12, "users"."updated_at" AS t2_r13, "users"."autosave" AS t2_r14 FROM "sharenotes" LEFT OUTER JOIN "notes" ON "notes"."id" = "sharenotes"."note_id" LEFT OUTER JOIN "users" ON "users"."id" = "sharenotes"."user_id" WHERE "sharenotes"."email" = ? AND "notes"."status" = ?[0m  [["email", "ssa@narola.email"], ["status", 0]]
+  ↳ app/views/sharenotes/_index.html.erb:19
+  Rendered sharenotes/_index.html.erb (5.5ms)
+  Rendered sharenotes/index.js.erb (52.5ms)
+Completed 200 OK in 166ms (Views: 118.1ms | ActiveRecord: 1.0ms)
+
+
+Started DELETE "/users/sign_out" for 127.0.0.1 at 2019-03-11 17:58:35 +0530
+Processing by Devise::SessionsController#destroy as HTML
+  Parameters: {"authenticity_token"=>"b4PhwFUP9O+CWhDCVoBfE6KccoZBYFhyJCpBEfVsGaX+O19BlwSxx9OwByYfljQykWv6kWfnQq8Ha2pD7HCRaw=="}
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  [1m[35m (0.1ms)[0m  [1m[36mcommit transaction[0m
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+Redirected to http://localhost:3000/
+Completed 302 Found in 9ms (ActiveRecord: 0.8ms)
+
+
+Started GET "/" for 127.0.0.1 at 2019-03-11 17:58:35 +0530
+Processing by NotesController#index as HTML
+Completed 401 Unauthorized in 1ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2019-03-11 17:58:35 +0530
+Processing by Devise::SessionsController#new as HTML
+  Rendering devise/sessions/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (2.1ms)
+  Rendered devise/sessions/new.html.erb within layouts/application (8.7ms)
+Completed 200 OK in 184ms (Views: 182.3ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2019-03-11 18:03:55 +0530
+Processing by NotesController#index as HTML
+Completed 401 Unauthorized in 8ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2019-03-11 18:03:55 +0530
+Processing by Devise::SessionsController#new as HTML
+  Rendering devise/sessions/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (1.0ms)
+  Rendered devise/sessions/new.html.erb within layouts/application (6.3ms)
+Completed 200 OK in 161ms (Views: 143.7ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/admin" for 127.0.0.1 at 2019-03-11 18:03:58 +0530
+Processing by Admin::DashboardController#index as HTML
+Completed 401 Unauthorized in 1ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/admin/login" for 127.0.0.1 at 2019-03-11 18:03:58 +0530
+Processing by ActiveAdmin::Devise::SessionsController#new as HTML
+  Rendering /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activeadmin-1.4.3/app/views/active_admin/devise/sessions/new.html.erb within layouts/active_admin_logged_out
+  Rendered /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activeadmin-1.4.3/app/views/active_admin/devise/shared/_links.erb (1.3ms)
+  Rendered /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activeadmin-1.4.3/app/views/active_admin/devise/sessions/new.html.erb within layouts/active_admin_logged_out (72.5ms)
+Completed 200 OK in 431ms (Views: 421.0ms | ActiveRecord: 0.6ms)
+
+
+Started POST "/admin/login" for 127.0.0.1 at 2019-03-11 18:04:07 +0530
+Processing by ActiveAdmin::Devise::SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"UIYq91S1tRs40Z+oZ6xJ/aVo0qzvpqG6Rp/8WRuP93ASTB7ALzCppP0SkcC9keLoDXDx93UEinAt5Grk9L04sQ==", "admin_user"=>{"email"=>"djgaddam3@gmail.com", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Login"}
+  [1m[36mAdminUser Load (0.3ms)[0m  [1m[34mSELECT  "admin_users".* FROM "admin_users" WHERE "admin_users"."email" = ? ORDER BY "admin_users"."id" ASC LIMIT ?[0m  [["email", "djgaddam3@gmail.com"], ["LIMIT", 1]]
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+Completed 401 Unauthorized in 9ms (ActiveRecord: 1.6ms)
+
+
+Processing by ActiveAdmin::Devise::SessionsController#new as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"UIYq91S1tRs40Z+oZ6xJ/aVo0qzvpqG6Rp/8WRuP93ASTB7ALzCppP0SkcC9keLoDXDx93UEinAt5Grk9L04sQ==", "admin_user"=>{"email"=>"djgaddam3@gmail.com", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Login"}
+  Rendering /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activeadmin-1.4.3/app/views/active_admin/devise/sessions/new.html.erb within layouts/active_admin_logged_out
+  Rendered /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activeadmin-1.4.3/app/views/active_admin/devise/shared/_links.erb (1.5ms)
+  Rendered /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activeadmin-1.4.3/app/views/active_admin/devise/sessions/new.html.erb within layouts/active_admin_logged_out (53.0ms)
+Completed 200 OK in 348ms (Views: 205.4ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/admin/" for 127.0.0.1 at 2019-03-11 18:04:15 +0530
+Processing by Admin::DashboardController#index as HTML
+Completed 401 Unauthorized in 1ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/admin/login" for 127.0.0.1 at 2019-03-11 18:04:15 +0530
+Processing by ActiveAdmin::Devise::SessionsController#new as HTML
+  Rendering /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activeadmin-1.4.3/app/views/active_admin/devise/sessions/new.html.erb within layouts/active_admin_logged_out
+  Rendered /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activeadmin-1.4.3/app/views/active_admin/devise/shared/_links.erb (1.2ms)
+  Rendered /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activeadmin-1.4.3/app/views/active_admin/devise/sessions/new.html.erb within layouts/active_admin_logged_out (29.6ms)
+Completed 200 OK in 148ms (Views: 147.1ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/admin/login" for 127.0.0.1 at 2019-03-11 18:05:14 +0530
+Processing by ActiveAdmin::Devise::SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"HHuhOloHAWFQxXYlUX2BaZ5tMf46u39uL7imcIxXZ55esZUNIYId3pUGeE2LQCp8NnUSpaAZVKREwzDNY2WoXw==", "admin_user"=>{"email"=>"admin@example.com", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Login"}
+  [1m[36mAdminUser Load (0.3ms)[0m  [1m[34mSELECT  "admin_users".* FROM "admin_users" WHERE "admin_users"."email" = ? ORDER BY "admin_users"."id" ASC LIMIT ?[0m  [["email", "admin@example.com"], ["LIMIT", 1]]
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+Completed 401 Unauthorized in 2ms (ActiveRecord: 0.3ms)
+
+
+Processing by ActiveAdmin::Devise::SessionsController#new as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"HHuhOloHAWFQxXYlUX2BaZ5tMf46u39uL7imcIxXZ55esZUNIYId3pUGeE2LQCp8NnUSpaAZVKREwzDNY2WoXw==", "admin_user"=>{"email"=>"admin@example.com", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Login"}
+  Rendering /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activeadmin-1.4.3/app/views/active_admin/devise/sessions/new.html.erb within layouts/active_admin_logged_out
+  Rendered /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activeadmin-1.4.3/app/views/active_admin/devise/shared/_links.erb (1.3ms)
+  Rendered /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activeadmin-1.4.3/app/views/active_admin/devise/sessions/new.html.erb within layouts/active_admin_logged_out (28.8ms)
+Completed 200 OK in 358ms (Views: 226.0ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/admin/login" for 127.0.0.1 at 2019-03-11 18:05:29 +0530
+Processing by ActiveAdmin::Devise::SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"e/80lisv2pjy2Vb/FYBtdms2SIhDP3GmL6AjMaEvTXA5NQChUKrGJzcaWJfPvcZjwy5r09mdWmxE27WMTh2CsQ==", "admin_user"=>{"email"=>"admin@example.com", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Login"}
+  [1m[36mAdminUser Load (0.5ms)[0m  [1m[34mSELECT  "admin_users".* FROM "admin_users" WHERE "admin_users"."email" = ? ORDER BY "admin_users"."id" ASC LIMIT ?[0m  [["email", "admin@example.com"], ["LIMIT", 1]]
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+Completed 401 Unauthorized in 5ms (ActiveRecord: 0.5ms)
+
+
+Processing by ActiveAdmin::Devise::SessionsController#new as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"e/80lisv2pjy2Vb/FYBtdms2SIhDP3GmL6AjMaEvTXA5NQChUKrGJzcaWJfPvcZjwy5r09mdWmxE27WMTh2CsQ==", "admin_user"=>{"email"=>"admin@example.com", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Login"}
+  Rendering /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activeadmin-1.4.3/app/views/active_admin/devise/sessions/new.html.erb within layouts/active_admin_logged_out
+  Rendered /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activeadmin-1.4.3/app/views/active_admin/devise/shared/_links.erb (1.2ms)
+  Rendered /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activeadmin-1.4.3/app/views/active_admin/devise/sessions/new.html.erb within layouts/active_admin_logged_out (24.9ms)
+Completed 200 OK in 278ms (Views: 144.2ms | ActiveRecord: 0.0ms)
+
+
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mAdminUser Exists (0.2ms)[0m  [1m[34mSELECT  1 AS one FROM "admin_users" WHERE "admin_users"."email" = ? LIMIT ?[0m  [["email", "djgaddam03@gmail.com"], ["LIMIT", 1]]
+  [1m[36mAdminUser Create (0.9ms)[0m  [1m[32mINSERT INTO "admin_users" ("email", "encrypted_password", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["email", "djgaddam03@gmail.com"], ["encrypted_password", "$2a$11$puc81u9wHpLLSUeQaALk9.KP41sacec16QQlyZIJ9aitYYBsv7eQ."], ["created_at", "2019-03-11 12:41:59.050305"], ["updated_at", "2019-03-11 12:41:59.050305"]]
+  [1m[35m (1.6ms)[0m  [1m[36mcommit transaction[0m
+Started POST "/admin/login" for 127.0.0.1 at 2019-03-11 18:12:44 +0530
+Processing by ActiveAdmin::Devise::SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"bx/IKBQk3jTLqN0XWaFsjyEjcyNryFw9BQ8tYcZlRP4t1fwfb6HCiw5r03+DnMeaiTtQePFqd/dudLvcKVeLPw==", "admin_user"=>{"email"=>"djgaddam03@gmail.com", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Login"}
+  [1m[36mAdminUser Load (0.4ms)[0m  [1m[34mSELECT  "admin_users".* FROM "admin_users" WHERE "admin_users"."email" = ? ORDER BY "admin_users"."id" ASC LIMIT ?[0m  [["email", "djgaddam03@gmail.com"], ["LIMIT", 1]]
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+Redirected to http://localhost:3000/admin
+Completed 302 Found in 183ms (ActiveRecord: 0.7ms)
+
+
+Started GET "/admin" for 127.0.0.1 at 2019-03-11 18:12:44 +0530
+Processing by Admin::DashboardController#index as HTML
+  [1m[36mAdminUser Load (0.2ms)[0m  [1m[34mSELECT  "admin_users".* FROM "admin_users" WHERE "admin_users"."id" = ? ORDER BY "admin_users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  Rendering /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activeadmin-1.4.3/app/views/active_admin/page/index.html.arb
+  Rendered /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activeadmin-1.4.3/app/views/active_admin/page/index.html.arb (228.1ms)
+Completed 200 OK in 267ms (Views: 235.9ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/admin" for 127.0.0.1 at 2019-03-11 18:13:06 +0530
+Processing by Admin::DashboardController#index as HTML
+  [1m[36mAdminUser Load (0.3ms)[0m  [1m[34mSELECT  "admin_users".* FROM "admin_users" WHERE "admin_users"."id" = ? ORDER BY "admin_users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  Rendering /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activeadmin-1.4.3/app/views/active_admin/page/index.html.arb
+  Rendered /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activeadmin-1.4.3/app/views/active_admin/page/index.html.arb (175.9ms)
+Completed 200 OK in 204ms (Views: 185.1ms | ActiveRecord: 0.9ms)
+
+
+Started GET "/admin/admin_comments" for 127.0.0.1 at 2019-03-11 18:13:07 +0530
+Processing by Admin::AdminCommentsController#index as HTML
+  [1m[36mAdminUser Load (0.2ms)[0m  [1m[34mSELECT  "admin_users".* FROM "admin_users" WHERE "admin_users"."id" = ? ORDER BY "admin_users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  Rendering /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activeadmin-1.4.3/app/views/active_admin/resource/index.html.arb
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "active_admin_comments" WHERE "active_admin_comments"."namespace" = ?[0m  [["namespace", "admin"]]
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  [1m[35mCACHE  (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "active_admin_comments" WHERE "active_admin_comments"."namespace" = ?[0m  [["namespace", "admin"]]
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT DISTINCT "active_admin_comments"."resource_type" FROM "active_admin_comments" ORDER BY resource_type asc[0m
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT DISTINCT "active_admin_comments"."author_type" FROM "active_admin_comments" ORDER BY author_type asc[0m
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  Rendered /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activeadmin-1.4.3/app/views/active_admin/resource/index.html.arb (234.9ms)
+Completed 200 OK in 260ms (Views: 252.1ms | ActiveRecord: 2.1ms)
+
+
+Started GET "/admin/admin_users" for 127.0.0.1 at 2019-03-11 18:13:09 +0530
+Processing by Admin::AdminUsersController#index as HTML
+  [1m[36mAdminUser Load (0.3ms)[0m  [1m[34mSELECT  "admin_users".* FROM "admin_users" WHERE "admin_users"."id" = ? ORDER BY "admin_users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  Rendering /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activeadmin-1.4.3/app/views/active_admin/resource/index.html.arb
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "admin_users"[0m
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  [1m[35mCACHE  (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "admin_users"[0m
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  [1m[35mCACHE  (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "admin_users"[0m
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  [1m[35mCACHE  (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "admin_users"[0m
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  [1m[36mAdminUser Load (0.3ms)[0m  [1m[34mSELECT  "admin_users".* FROM "admin_users" ORDER BY "admin_users"."id" desc LIMIT ? OFFSET ?[0m  [["LIMIT", 30], ["OFFSET", 0]]
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  Rendered /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activeadmin-1.4.3/app/views/active_admin/resource/index.html.arb (175.5ms)
+Completed 200 OK in 196ms (Views: 190.6ms | ActiveRecord: 1.1ms)
+
+
+Started GET "/admin/comments" for 127.0.0.1 at 2019-03-11 18:13:10 +0530
+Processing by Admin::CommentsController#index as HTML
+  [1m[36mAdminUser Load (0.3ms)[0m  [1m[34mSELECT  "admin_users".* FROM "admin_users" WHERE "admin_users"."id" = ? ORDER BY "admin_users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  Rendering /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activeadmin-1.4.3/app/views/active_admin/resource/index.html.arb
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "comments"[0m
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  [1m[36mNote Load (0.2ms)[0m  [1m[34mSELECT "notes".* FROM "notes"[0m
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  Rendered /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activeadmin-1.4.3/app/views/active_admin/resource/index.html.arb (122.8ms)
+Completed 200 OK in 148ms (Views: 140.8ms | ActiveRecord: 2.3ms)
+
+
+Started GET "/admin/notes" for 127.0.0.1 at 2019-03-11 18:13:12 +0530
+Processing by Admin::NotesController#index as HTML
+  [1m[36mAdminUser Load (0.4ms)[0m  [1m[34mSELECT  "admin_users".* FROM "admin_users" WHERE "admin_users"."id" = ? ORDER BY "admin_users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  Rendering /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activeadmin-1.4.3/app/views/active_admin/resource/index.html.arb
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "notes"[0m
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  [1m[35mCACHE  (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "notes"[0m
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  [1m[35mCACHE  (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "notes"[0m
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  [1m[35mCACHE  (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "notes"[0m
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  [1m[36mNote Load (0.2ms)[0m  [1m[34mSELECT  "notes".* FROM "notes" ORDER BY "notes"."id" desc LIMIT ? OFFSET ?[0m  [["LIMIT", 30], ["OFFSET", 0]]
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/admin/notes.rb:22
+  [1m[36mComment Load (0.2ms)[0m  [1m[34mSELECT "comments".* FROM "comments"[0m
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  [1m[36mSharenote Load (0.2ms)[0m  [1m[34mSELECT "sharenotes".* FROM "sharenotes"[0m
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  [1m[36mCharge Load (0.4ms)[0m  [1m[34mSELECT "charges".* FROM "charges"[0m
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  [1m[36mActsAsTaggableOn::Tagging Load (0.2ms)[0m  [1m[34mSELECT "taggings".* FROM "taggings"[0m
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  [1m[36mActsAsTaggableOn::Tag Load (0.3ms)[0m  [1m[34mSELECT "tags".* FROM "tags"[0m
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  [1m[36mCACHE ActsAsTaggableOn::Tagging Load (0.0ms)[0m  [1m[34mSELECT "taggings".* FROM "taggings"[0m
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  [1m[36mCACHE ActsAsTaggableOn::Tag Load (0.0ms)[0m  [1m[34mSELECT "tags".* FROM "tags"[0m
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  Rendered /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activeadmin-1.4.3/app/views/active_admin/resource/index.html.arb (208.2ms)
+Completed 200 OK in 232ms (Views: 221.2ms | ActiveRecord: 5.1ms)
+
+
+Started GET "/admin/sharenotes" for 127.0.0.1 at 2019-03-11 18:13:14 +0530
+Processing by Admin::SharenotesController#index as HTML
+  [1m[36mAdminUser Load (0.4ms)[0m  [1m[34mSELECT  "admin_users".* FROM "admin_users" WHERE "admin_users"."id" = ? ORDER BY "admin_users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  Rendering /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activeadmin-1.4.3/app/views/active_admin/resource/index.html.arb
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "sharenotes"[0m
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  [1m[35mCACHE  (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "sharenotes"[0m
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  [1m[35mCACHE  (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "sharenotes"[0m
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  [1m[35mCACHE  (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "sharenotes"[0m
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  [1m[36mSharenote Load (0.2ms)[0m  [1m[34mSELECT  "sharenotes".* FROM "sharenotes" ORDER BY "sharenotes"."id" desc LIMIT ? OFFSET ?[0m  [["LIMIT", 30], ["OFFSET", 0]]
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/admin/sharenotes.rb:21
+  [1m[36mNote Load (0.2ms)[0m  [1m[34mSELECT  "notes".* FROM "notes" WHERE "notes"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/admin/sharenotes.rb:22
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  [1m[36mNote Load (0.2ms)[0m  [1m[34mSELECT "notes".* FROM "notes"[0m
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  Rendered /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activeadmin-1.4.3/app/views/active_admin/resource/index.html.arb (149.4ms)
+Completed 200 OK in 169ms (Views: 163.3ms | ActiveRecord: 2.0ms)
+
+
+Started GET "/admin/users" for 127.0.0.1 at 2019-03-11 18:13:16 +0530
+Processing by Admin::UsersController#index as HTML
+  [1m[36mAdminUser Load (0.3ms)[0m  [1m[34mSELECT  "admin_users".* FROM "admin_users" WHERE "admin_users"."id" = ? ORDER BY "admin_users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  Rendering /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activeadmin-1.4.3/app/views/active_admin/resource/index.html.arb
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "users"[0m
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  [1m[35mCACHE  (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "users"[0m
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  [1m[35mCACHE  (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "users"[0m
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  [1m[35mCACHE  (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "users"[0m
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  [1m[35mCACHE  (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "users"[0m
+  ↳ config/initializers/will_paginate.rb:6
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" ORDER BY "users"."id" desc LIMIT ? OFFSET ?[0m  [["LIMIT", 30], ["OFFSET", 0]]
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  [1m[36mNote Load (0.3ms)[0m  [1m[34mSELECT "notes".* FROM "notes"[0m
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  [1m[36mComment Load (0.2ms)[0m  [1m[34mSELECT "comments".* FROM "comments"[0m
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  [1m[36mSharenote Load (0.2ms)[0m  [1m[34mSELECT "sharenotes".* FROM "sharenotes"[0m
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  [1m[36mCharge Load (0.4ms)[0m  [1m[34mSELECT "charges".* FROM "charges"[0m
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  [1m[36mActiveStorage::Attachment Load (0.2ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments"[0m
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  [1m[36mActiveStorage::Blob Load (0.3ms)[0m  [1m[34mSELECT  "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  [1m[36mActiveStorage::Blob Load (0.4ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs"[0m
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  Rendered /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activeadmin-1.4.3/app/views/active_admin/resource/index.html.arb (242.4ms)
+Completed 200 OK in 262ms (Views: 254.5ms | ActiveRecord: 3.9ms)
+
+
+user: c100-74
+GET /admin/users
+USE eager loading detected
+  ActiveStorage::Attachment => [:blob]
+  Add to your finder: :includes => [:blob]
+Call stack
+
+
+Started GET "/admin/sharenotes" for 127.0.0.1 at 2019-03-11 18:13:17 +0530
+Processing by Admin::SharenotesController#index as HTML
+  [1m[36mAdminUser Load (0.4ms)[0m  [1m[34mSELECT  "admin_users".* FROM "admin_users" WHERE "admin_users"."id" = ? ORDER BY "admin_users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  Rendering /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activeadmin-1.4.3/app/views/active_admin/resource/index.html.arb
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "sharenotes"[0m
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  [1m[35mCACHE  (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "sharenotes"[0m
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  [1m[35mCACHE  (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "sharenotes"[0m
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  [1m[35mCACHE  (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "sharenotes"[0m
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  [1m[36mSharenote Load (0.2ms)[0m  [1m[34mSELECT  "sharenotes".* FROM "sharenotes" ORDER BY "sharenotes"."id" desc LIMIT ? OFFSET ?[0m  [["LIMIT", 30], ["OFFSET", 0]]
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/admin/sharenotes.rb:21
+  [1m[36mNote Load (0.2ms)[0m  [1m[34mSELECT  "notes".* FROM "notes" WHERE "notes"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/admin/sharenotes.rb:22
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  [1m[36mNote Load (0.3ms)[0m  [1m[34mSELECT "notes".* FROM "notes"[0m
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  Rendered /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activeadmin-1.4.3/app/views/active_admin/resource/index.html.arb (144.6ms)
+Completed 200 OK in 166ms (Views: 158.9ms | ActiveRecord: 1.9ms)
+
+
+Started GET "/admin/notes" for 127.0.0.1 at 2019-03-11 18:13:20 +0530
+Processing by Admin::NotesController#index as HTML
+  [1m[36mAdminUser Load (0.3ms)[0m  [1m[34mSELECT  "admin_users".* FROM "admin_users" WHERE "admin_users"."id" = ? ORDER BY "admin_users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  Rendering /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activeadmin-1.4.3/app/views/active_admin/resource/index.html.arb
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "notes"[0m
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  [1m[35mCACHE  (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "notes"[0m
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  [1m[35mCACHE  (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "notes"[0m
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  [1m[35mCACHE  (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "notes"[0m
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  [1m[36mNote Load (0.3ms)[0m  [1m[34mSELECT  "notes".* FROM "notes" ORDER BY "notes"."id" desc LIMIT ? OFFSET ?[0m  [["LIMIT", 30], ["OFFSET", 0]]
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/admin/notes.rb:22
+  [1m[36mComment Load (0.2ms)[0m  [1m[34mSELECT "comments".* FROM "comments"[0m
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  [1m[36mSharenote Load (0.2ms)[0m  [1m[34mSELECT "sharenotes".* FROM "sharenotes"[0m
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  [1m[36mCharge Load (0.2ms)[0m  [1m[34mSELECT "charges".* FROM "charges"[0m
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  [1m[36mActsAsTaggableOn::Tagging Load (0.2ms)[0m  [1m[34mSELECT "taggings".* FROM "taggings"[0m
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  [1m[36mActsAsTaggableOn::Tag Load (0.2ms)[0m  [1m[34mSELECT "tags".* FROM "tags"[0m
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  [1m[36mCACHE ActsAsTaggableOn::Tagging Load (0.0ms)[0m  [1m[34mSELECT "taggings".* FROM "taggings"[0m
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  [1m[36mCACHE ActsAsTaggableOn::Tag Load (0.0ms)[0m  [1m[34mSELECT "tags".* FROM "tags"[0m
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  Rendered /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activeadmin-1.4.3/app/views/active_admin/resource/index.html.arb (339.6ms)
+Completed 200 OK in 366ms (Views: 359.6ms | ActiveRecord: 2.5ms)
+
+
+Started GET "/admin/sharenotes" for 127.0.0.1 at 2019-03-11 18:13:24 +0530
+Processing by Admin::SharenotesController#index as HTML
+  [1m[36mAdminUser Load (0.2ms)[0m  [1m[34mSELECT  "admin_users".* FROM "admin_users" WHERE "admin_users"."id" = ? ORDER BY "admin_users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  Rendering /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activeadmin-1.4.3/app/views/active_admin/resource/index.html.arb
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "sharenotes"[0m
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  [1m[35mCACHE  (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "sharenotes"[0m
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  [1m[35mCACHE  (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "sharenotes"[0m
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  [1m[35mCACHE  (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "sharenotes"[0m
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  [1m[36mSharenote Load (0.2ms)[0m  [1m[34mSELECT  "sharenotes".* FROM "sharenotes" ORDER BY "sharenotes"."id" desc LIMIT ? OFFSET ?[0m  [["LIMIT", 30], ["OFFSET", 0]]
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/admin/sharenotes.rb:21
+  [1m[36mNote Load (0.3ms)[0m  [1m[34mSELECT  "notes".* FROM "notes" WHERE "notes"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/admin/sharenotes.rb:22
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  [1m[36mNote Load (0.2ms)[0m  [1m[34mSELECT "notes".* FROM "notes"[0m
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  Rendered /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activeadmin-1.4.3/app/views/active_admin/resource/index.html.arb (169.7ms)
+Completed 200 OK in 192ms (Views: 187.4ms | ActiveRecord: 1.7ms)
+
+
+Started GET "/admin/notes/1" for 127.0.0.1 at 2019-03-11 18:13:29 +0530
+Processing by Admin::NotesController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mAdminUser Load (0.4ms)[0m  [1m[34mSELECT  "admin_users".* FROM "admin_users" WHERE "admin_users"."id" = ? ORDER BY "admin_users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  [1m[36mNote Load (0.3ms)[0m  [1m[34mSELECT  "notes".* FROM "notes" WHERE "notes"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  Rendering /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activeadmin-1.4.3/app/views/active_admin/resource/show.html.arb
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "active_admin_comments" WHERE "active_admin_comments"."resource_type" = ? AND "active_admin_comments"."resource_id" = ? AND "active_admin_comments"."namespace" = ?[0m  [["resource_type", "Note"], ["resource_id", 1], ["namespace", "admin"]]
+  ↳ config/initializers/will_paginate.rb:6
+  [1m[35mCACHE  (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "active_admin_comments" WHERE "active_admin_comments"."resource_type" = ? AND "active_admin_comments"."resource_id" = ? AND "active_admin_comments"."namespace" = ?[0m  [["resource_type", "Note"], ["resource_id", 1], ["namespace", "admin"]]
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  [1m[35mCACHE  (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "active_admin_comments" WHERE "active_admin_comments"."resource_type" = ? AND "active_admin_comments"."resource_id" = ? AND "active_admin_comments"."namespace" = ?[0m  [["resource_type", "Note"], ["resource_id", 1], ["namespace", "admin"]]
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  Rendered /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activeadmin-1.4.3/app/views/active_admin/resource/show.html.arb (222.8ms)
+Completed 200 OK in 247ms (Views: 240.7ms | ActiveRecord: 1.2ms)
+
+
+Started GET "/admin/sharenotes" for 127.0.0.1 at 2019-03-11 18:13:41 +0530
+Processing by Admin::SharenotesController#index as HTML
+  [1m[36mAdminUser Load (0.6ms)[0m  [1m[34mSELECT  "admin_users".* FROM "admin_users" WHERE "admin_users"."id" = ? ORDER BY "admin_users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  Rendering /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activeadmin-1.4.3/app/views/active_admin/resource/index.html.arb
+Started GET "/admin/sharenotes" for 127.0.0.1 at 2019-03-11 18:13:41 +0530
+Processing by Admin::SharenotesController#index as HTML
+  [1m[36mAdminUser Load (0.2ms)[0m  [1m[34mSELECT  "admin_users".* FROM "admin_users" WHERE "admin_users"."id" = ? ORDER BY "admin_users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  Rendering /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activeadmin-1.4.3/app/views/active_admin/resource/index.html.arb
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "sharenotes"[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "sharenotes"[0m
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  [1m[35mCACHE  (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "sharenotes"[0m
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  [1m[35mCACHE  (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "sharenotes"[0m
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  [1m[35mCACHE  (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "sharenotes"[0m
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  [1m[35mCACHE  (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "sharenotes"[0m
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  [1m[35mCACHE  (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "sharenotes"[0m
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  [1m[36mSharenote Load (0.3ms)[0m  [1m[34mSELECT  "sharenotes".* FROM "sharenotes" ORDER BY "sharenotes"."id" desc LIMIT ? OFFSET ?[0m  [["LIMIT", 30], ["OFFSET", 0]]
+  [1m[35mCACHE  (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "sharenotes"[0m
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mSharenote Load (0.3ms)[0m  [1m[34mSELECT  "sharenotes".* FROM "sharenotes" ORDER BY "sharenotes"."id" desc LIMIT ? OFFSET ?[0m  [["LIMIT", 30], ["OFFSET", 0]]
+  ↳ app/admin/sharenotes.rb:21
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  [1m[36mNote Load (0.3ms)[0m  [1m[34mSELECT  "notes".* FROM "notes" WHERE "notes"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/admin/sharenotes.rb:22
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/admin/sharenotes.rb:21
+  [1m[36mNote Load (0.3ms)[0m  [1m[34mSELECT "notes".* FROM "notes"[0m
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  [1m[36mNote Load (0.3ms)[0m  [1m[34mSELECT  "notes".* FROM "notes" WHERE "notes"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/admin/sharenotes.rb:22
+  Rendered /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activeadmin-1.4.3/app/views/active_admin/resource/index.html.arb (287.6ms)
+Completed 200 OK in 311ms (Views: 303.4ms | ActiveRecord: 2.5ms)
+
+
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  [1m[36mNote Load (0.2ms)[0m  [1m[34mSELECT "notes".* FROM "notes"[0m
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  Rendered /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activeadmin-1.4.3/app/views/active_admin/resource/index.html.arb (282.3ms)
+Completed 200 OK in 309ms (Views: 298.4ms | ActiveRecord: 4.9ms)
+
+
+Started GET "/admin/logout" for 127.0.0.1 at 2019-03-11 18:13:44 +0530
+Processing by ActiveAdmin::Devise::SessionsController#destroy as HTML
+  Parameters: {"authenticity_token"=>"zkBQUqvQh1AKWdoefENPyZeZtMZB1KxoqatIsvGIFsrW4wBKxl8S2K9fEA1Cn3wsbk8LxLWRhVKYmv1Gj3Eifw=="}
+  [1m[36mAdminUser Load (0.4ms)[0m  [1m[34mSELECT  "admin_users".* FROM "admin_users" WHERE "admin_users"."id" = ? ORDER BY "admin_users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  [1m[35m (0.3ms)[0m  [1m[36mbegin transaction[0m
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  [1m[35m (0.1ms)[0m  [1m[36mcommit transaction[0m
+  ↳ /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+Redirected to http://localhost:3000/admin
+Completed 302 Found in 8ms (ActiveRecord: 0.8ms)
+
+
+Started GET "/admin" for 127.0.0.1 at 2019-03-11 18:13:44 +0530
+Processing by Admin::DashboardController#index as HTML
+Completed 401 Unauthorized in 1ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/admin/login" for 127.0.0.1 at 2019-03-11 18:13:44 +0530
+Processing by ActiveAdmin::Devise::SessionsController#new as HTML
+  Rendering /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activeadmin-1.4.3/app/views/active_admin/devise/sessions/new.html.erb within layouts/active_admin_logged_out
+  Rendered /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activeadmin-1.4.3/app/views/active_admin/devise/shared/_links.erb (1.2ms)
+  Rendered /Users/c100-74/.rvm/gems/ruby-2.5.1/gems/activeadmin-1.4.3/app/views/active_admin/devise/sessions/new.html.erb within layouts/active_admin_logged_out (27.9ms)
+Completed 200 OK in 149ms (Views: 148.5ms | ActiveRecord: 0.0ms)
+
+
