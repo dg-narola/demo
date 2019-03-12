@@ -26,12 +26,13 @@ class NotesController < ApplicationController
   def search
     # tag = params[:search_notes][:query]
     query = params[:search_notes].presence && params[:search_notes][:query]
-    tags = Note.tagged_with(query)
-    note = Note.search_published(query)
+    # tags = Note.tagged_with(query)
+    # note = Note.search_published(query)
+    note = Note.all.includes(:taggings).search(query)
      # render plain: note.inspect
     return unless query
 
-    @notes =  tags + note
+    @notes =  note
      render plain: @notes.inspect
   end
 
