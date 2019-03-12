@@ -27,7 +27,7 @@ class SharenotesController < ApplicationController
     @sharednotes = Sharenote.all.includes(:note, :user).where(
       user_id: current_user.id
     ).where(notes: { status: false })
-    render plain: @hsraednotes.inspect
+    render plain: @sharednotes.inspect
   end
 
   #
