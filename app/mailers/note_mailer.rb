@@ -8,14 +8,14 @@ class NoteMailer < ApplicationMailer
   def share_email(sharenote, user)
     @sharenote = sharenote
     @user = user
-    @url = 'http://localhost:3000/notes'
+    @url = 'http://infinite-reaches-72546.herokuapp.com/notes'
     mail(to: @sharenote.email, subject: 'Note Shared')
   end
 
   ## for sharing notes via mail for unregistered users
   def reg_email(sharenote, user)
     @sharenote = sharenote
-    @url  = 'http://localhost:3000/users/sign_up'
+    @url  = 'http://linfinite-reaches-72546.herokuapp.com/users/sign_up'
     @user = user
     mail(to: @sharenote.email, subject: 'Note Shared')
   end
@@ -26,7 +26,7 @@ class NoteMailer < ApplicationMailer
     @noteid = note.id
     @sendto = sendto
     @user = user
-    @url  = "http://localhost:3000/notes/#{@noteid}/sharenotes/updatepermission"
+    @url  = "http://infinite-reaches-72546.herokuapp.com/notes/#{@noteid}/sharenotes/updatepermission"
     mail(to: @sendto, subject: 'Edit Access Mail')
   end
 end
