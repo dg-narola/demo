@@ -42,7 +42,7 @@ class NotesController < ApplicationController
           user_id: current_user.id
         ).distinct
       end
-     render plain: params.inspect
+     render plain: @notes.inspect
   end
 
   #
